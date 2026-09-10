@@ -7,6 +7,7 @@ export type PortfolioProject = {
   slug: string; title: string; featured: boolean; status: ProjectStatus;
   summary: string; description: string; stack: string[];
   engineeringChallenges: string[]; architectureHighlights: string[];
+  currentScope: string[]; nextStep: string;
   links: ProjectLink[]; cover: { src: string; alt: string };
   visual: "cobalt" | "violet" | "cyan" | "coral" | "lime";
 };
@@ -20,7 +21,12 @@ export function getData(locale: Locale) {
     role: t("Фронтенд-разработчик", "Frontend Developer"),
     stackLine: "React / TypeScript / Next.js",
     description: t("Портфолио Максима Жупарова: веб-интерфейсы, пользовательские сценарии и проекты на React и TypeScript.", "Maksim Zhuparov’s portfolio: web interfaces, user journeys and projects built with React and TypeScript."),
-    positioning: t("Здесь собраны мои проекты: от каталога и оформления заказа до инструментов для аналитики, работы с инцидентами и совместного редактирования.", "My projects range from catalogs and checkout journeys to tools for analytics, incident response and collaborative editing."),
+    positioning: t("Проектирую пользовательский путь, связываю интерфейс с данными и проверяю сценарий до результата — на примере восьми продуктовых проектов.", "I design the user journey, connect the interface to data and verify the path to an outcome across eight product projects."),
+    proofPoints: [
+      t("8 продуктовых кейсов", "8 product case studies"),
+      t("Русский и English", "English and русский"),
+      t("Адаптивность и доступность", "Responsive and accessible"),
+    ],
     location: "", avatarUrl: "", resumeUrl: "",
     githubUrl: "https://github.com/godaylor",
     contact: { email: "maxeemzhuparov@mail.ru", tel: "", telegram: "https://t.me/maximsberbank" },
@@ -52,5 +58,5 @@ export const DATA = getData("ru");
 export const OWNER_CONTENT_TODO = {
   optionalProfile: ["location", "avatarUrl", "resumeUrl", "work and education"],
   projects: ["public repository URLs", "live demo URLs", "approved screenshots or video", "individual contribution details"],
-  publishing: ["production domain", "Vercel project access", "Git repository for this portfolio"],
+  publishing: ["authenticated GitHub and Vercel sessions", "production domain"],
 } as const;

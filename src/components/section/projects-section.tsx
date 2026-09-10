@@ -16,7 +16,7 @@ export default function ProjectsSection({ locale }: { locale: Locale }) {
         eyebrow={t("Проекты", "Selected work")}
         title={t("Веб-продукты и их устройство.", "Web products, inside and out.")}
         titleId="selected-work-title"
-        description={t("Восемь проектов с описанием задач, стека и ограничений. Публичные демо появятся после публикации.", "Eight projects with context, technology choices and limitations. Public demos will be linked after publication.")}
+        description={t("Восемь продуктовых кейсов. На каждой странице — текущий объём, инженерные решения, происхождение кода и следующий шаг к релизу.", "Eight product case studies. Each page shows the current scope, engineering decisions, code origins and the next release step.")}
       />
 
       <div className="featured-projects" aria-label={t("Все проекты", "All projects")}>

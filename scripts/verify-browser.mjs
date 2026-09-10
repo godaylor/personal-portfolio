@@ -3,13 +3,30 @@ import { createRequire } from "node:module";
 import { mkdir } from "node:fs/promises";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PORTFOLIO_PLAYWRIGHT_MODULE || "@playwright/test");
-const base = "http://127.0.0.1:32800";
+const base = process.env.PORTFOLIO_BASE_URL || "http://127.0.0.1:32800";
 const slugs = ["relayops", "signal-studio", "variantlab", "opsweave", "replaylab", "napoli", "solecraft", "crypto-portfolio"];
-const browser = await chromium.launch({ headless: true });
+const channel = process.env.PORTFOLIO_PLAYWRIGHT_CHANNEL || "chrome";
+
+for (let attempt = 0; attempt < 30; attempt += 1) {
+  try {
+    const response = await fetch(base);
+    if (response.ok) break;
+  } catch {
+    if (attempt === 29) throw new Error(`Portfolio server did not become available at ${base}`);
+  }
+  await new Promise(resolve => setTimeout(resolve, 500));
+}
+
+const browser = await chromium.launch({ headless: true, channel });
 const errors = [];
 await mkdir("docs/screenshots", { recursive: true });
 try {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, reducedMotion: "reduce" });
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 1000 },
+    reducedMotion: "reduce",
+    permissions: ["clipboard-read", "clipboard-write"],
+  });
+  const page = await context.newPage();
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
   for (const prefix of ["", "/en"]) {
@@ -20,15 +37,19 @@ try {
       assert.equal(await page.locator("html").getAttribute("lang"), prefix ? "en" : "ru");
       assert.equal(await page.locator("main#main-content").count(), 1);
       assert.equal(await page.locator("h1").count(), 1);
+      if (path.startsWith("/work/")) {
+        assert.ok(await page.locator(".case-study__next").isVisible());
+        assert.ok(await page.locator(".case-study__section").filter({ hasText: prefix ? "Current scope" : "Текущий объём" }).isVisible());
+      }
       if (path === "" && !prefix) {
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Napoli" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "готово");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Crypto Portfolio" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "требует обновления");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "скоро");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "Napoli" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "локально проверено");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "Crypto Portfolio" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "на переработке");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "в разработке");
       }
       if (path === "" && prefix) {
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Napoli" }).locator(".project-card__meta").innerText()).toLowerCase(), "ready");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Crypto Portfolio" }).locator(".project-card__meta").innerText()).toLowerCase(), "needs update");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLowerCase(), "coming soon");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "Napoli" }).locator(".project-card__meta").innerText()).toLowerCase(), "locally verified");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "Crypto Portfolio" }).locator(".project-card__meta").innerText()).toLowerCase(), "being rebuilt");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLowerCase(), "in development");
       }
       const links = await page.locator("a[href]").evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
       for (const href of links) {
@@ -64,11 +85,17 @@ try {
     await page.goto(base + "/");
     await page.screenshot({ path: "docs/screenshots/portfolio-ru-" + width + ".png", fullPage: true });
     await page.screenshot({ path: "docs/screenshots/portfolio-hero-" + width + ".png" });
+    if ([390, 820, 1440].includes(width)) {
+      await page.screenshot({ path: "docs/screenshots/portfolio-production-" + (width === 390 ? "mobile-390" : width === 820 ? "tablet-820" : "desktop-1440") + ".png", fullPage: true });
+    }
   }
   await page.goto(base + "/");
   await page.locator('a[href="/#contact"]').first().click();
   await page.locator('a[href="mailto:maxeemzhuparov@mail.ru"]').waitFor({ state: "visible" });
   assert.equal(await page.locator('a[href="https://t.me/maximsberbank"]').count(), 1);
+  await page.getByRole("button", { name: "Скопировать email" }).click();
+  await page.getByText("Адрес сохранён в буфере обмена.").waitFor({ state: "visible" });
+  assert.equal(await page.locator(".contact-panel__feedback").innerText(), "Адрес сохранён в буфере обмена.");
   const before = await page.locator("html").getAttribute("class");
   await page.getByRole("button", { name: "Сменить тему" }).click();
   assert.notEqual(await page.locator("html").getAttribute("class"), before);

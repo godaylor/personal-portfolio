@@ -19,21 +19,38 @@
 Маршрутизация локалей использует серверные страницы согласно
 [Next.js internationalization](https://nextjs.org/docs/app/guides/internationalization).
 
+## Текущее состояние
+
+- `origin` настроен на `https://github.com/godaylor/personal-portfolio.git`,
+  ветка — `main`.
+- Локальная папка связана с Vercel project id через `.vercel/project.json`
+  (файл игнорируется Git).
+- Сохранённая GitHub CLI-сессия недействительна; Vercel CLI в PATH отсутствует.
+  Поэтому push, настройка GitHub About и production deploy в текущем проходе
+  объективно нельзя подтвердить без входа владельца.
+
 ## Что нужно для фактической публикации
 
 Эта конфигурация не требует платной базы данных, API-ключей или внешнего
 сервиса. Тариф и лимиты Vercel зависят от аккаунта владельца.
 
-1. Git URL **этого портфолио**: сейчас Git remote не настроен. Создать/выбрать
-   репозиторий, включить workflow из `.github/workflows/ci.yml` и проверить
-   состав незакоммиченных изменений перед commit/push.
-2. Доступ к нужному аккаунту/team Vercel и разрешение импортировать этот Git repo.
-3. Выбрать Vercel URL или собственный домен; при собственном домене нужен доступ к DNS.
-4. Указать origin в Production environment, выполнить deploy.
+1. Восстановить CLI-вход владельца в GitHub и Vercel на этом компьютере.
+2. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
+3. В связанном Vercel project выбрать URL или собственный домен.
+4. Указать origin в Production environment и выполнить deploy.
 5. На реальном URL проверить обе локали, все проекты, контакты, 404, OG,
    canonical/hreflang, robots/sitemap, HTTPS и мобильный вид.
 
-В рамках локальной подготовки deploy, commit и push не выполняются.
+## GitHub About после входа
+
+- **Description:** `Bilingual product-minded frontend portfolio with 8 React case studies, accessible UX and end-to-end browser verification.`
+- **Website:** точный production HTTPS URL после Vercel deploy.
+- **Topics:** `portfolio`, `frontend`, `react`, `nextjs`, `typescript`,
+  `accessibility`, `i18n`, `playwright`, `case-study`.
+
+Команды не должны завершать чужие процессы или затрагивать Docker. Если 32800
+занят, текущий проект следует запустить на свободном порту, а проверке передать
+`PORTFOLIO_BASE_URL`.
 
 ## Контент после публикации
 

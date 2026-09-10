@@ -25,10 +25,11 @@ export default async function ProjectPage({ params }: Props) {
       <section className="case-study__hero" aria-labelledby="project-title">
         <div>
           <p className="case-study__status">{project.status}</p>
-          <h1 id="project-title">{project.title}</h1>
+          <h1 id="project-title" translate="no">{project.title}</h1>
           <p className="case-study__summary">{project.summary}</p>
           <div className="case-study__actions">
             {project.links.map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label === "Live demo" ? t("Открыть демо", "Live demo") : link.label}<ArrowUpRight aria-hidden="true" /></a>)}
+            {project.links.length === 0 ? <p className="case-study__availability">{t("Публичная ссылка появится после release-проверки.", "A public link will follow the release verification.")}</p> : null}
           </div>
         </div>
         <ProjectMedia locale={locale} project={project} priority />
@@ -37,9 +38,11 @@ export default async function ProjectPage({ params }: Props) {
         <p className="case-study__body-label">{t("О проекте", "Project notes")}</p>
         <div className="case-study__details">
           <div className="case-study__section"><h2 id="case-notes-title">{t("Сценарий и границы", "Context and boundaries")}</h2><p className="case-study__summary">{project.description}</p></div>
-          <div className="case-study__section"><h2>{t("Технологии", "Stack")}</h2><ul>{project.stack.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div className="case-study__section"><h2>{t("Текущий объём", "Current scope")}</h2><ul>{project.currentScope.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div className="case-study__section"><h2>{t("Технологии", "Stack")}</h2><ul translate="no">{project.stack.map(item => <li key={item}>{item}</li>)}</ul></div>
           <div className="case-study__section"><h2>{t("Инженерные задачи", "Engineering challenges")}</h2><ul>{project.engineeringChallenges.map(item => <li key={item}>{item}</li>)}</ul></div>
           <div className="case-study__section"><h2>{t("Архитектура и происхождение", "Architecture and origins")}</h2><ul>{project.architectureHighlights.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div className="case-study__next"><p>{t("Следующий шаг", "Next release step")}</p><strong>{project.nextStep}</strong></div>
           <Link className="case-study__back" href={localizedPath(locale, "/#contact")}>{t("Обсудить проект", "Discuss this project")}<ArrowUpRight aria-hidden="true" /></Link>
         </div>
       </section>

@@ -1,17 +1,22 @@
-# Максим Жупаров — персональное портфолио
+# Максим Жупаров — frontend-портфолио
 
-Существующий сайт на Next.js, React и TypeScript. Русский язык открывается по
+Самостоятельный двуязычный сайт-портфолио на Next.js, React и TypeScript. Он
+показывает продуктовые кейсы не как галерею логотипов, а через сценарий,
+текущий объём, инженерные решения, происхождение кода и следующий шаг к релизу.
+Русский язык открывается по
 `/`, английский — по `/en`. Переключатель сохраняет текущий путь и якорь;
 язык закреплён в URL, поэтому сохраняется после перезагрузки.
 
 ## Содержание
 
 - Персональные тексты и подтверждённые email, Telegram, GitHub.
-- Единая сетка из восьми карточек: Napoli, RelayOps, Signal Studio, VariantLab,
+- Единая сетка из 8 карточек: Napoli, RelayOps, Signal Studio, VariantLab,
   OpsWeave, ReplayLab, Solecraft и Crypto Portfolio.
-- Внутренние страницы `/work/[slug]` и `/en/work/[slug]`: описание, стек,
-  инженерные задачи, архитектура, происхождение и ограничения.
+- Внутренние страницы `/work/[slug]` и `/en/work/[slug]`: текущий объём, стек,
+  инженерные задачи, архитектура, происхождение, ограничения и release step.
 - Адаптивный интерфейс, светлая/тёмная темы, focus и reduced motion.
+- Рабочие email, Telegram и GitHub actions; email можно скопировать с доступным
+  success/error feedback.
 - Локализованные metadata, canonical/hreflang, JSON-LD, Open Graph, sitemap и robots.
 - Сохранён MDX/blog pipeline; статей пока нет, раздел не включён в навигацию.
 
@@ -19,10 +24,21 @@
 Данные владельца: `src/data/resume.tsx`; проекты: `src/data/projects.ts`.
 Неподтверждённые опыт, образование, фотография и резюме не отображаются.
 
-Статусы сейчас такие: Napoli — «Готово» для локально подтверждённого сценария;
-RelayOps, Signal Studio, VariantLab, OpsWeave, ReplayLab и Solecraft — «Скоро»;
-старый Crypto Portfolio — «Требует обновления». У Napoli пока нет публичного
+Статусы сейчас такие: Napoli — «Локально проверено»;
+RelayOps, Signal Studio, VariantLab, OpsWeave, ReplayLab и Solecraft — «В разработке»;
+старый Crypto Portfolio — «На переработке». У Napoli пока нет публичного
 live URL, поэтому карточка ведёт на внутреннюю страницу проекта.
+
+## Архитектура
+
+- App Router генерирует русские и английские страницы на сервере.
+- Типизированный слой `src/data` отделяет подтверждённые факты от UI.
+- `NEXT_PUBLIC_SITE_URL` управляет canonical URLs и индексацией; preview и
+  локальная сборка получают `noindex`.
+- Content Collections сохраняет MDX-пайплайн для будущих технических заметок,
+  но пустой блог не занимает место в основной навигации.
+- Backend, база данных и auth сайту не нужны: контакты — обычные безопасные
+  ссылки, а контент собирается статически.
 
 ## Локальный запуск
 
@@ -47,16 +63,18 @@ install/update здесь добавляйте `--store-dir .pnpm-store`. Он �
 
 ```powershell
 pnpm lint
-node scripts/verify-mdx.mjs
+pnpm verify:mdx
 pnpm build
 pnpm start
+pnpm verify:browser
 ```
 
-`scripts/verify-browser.mjs` проверяет обе локали, страницы проектов, контакты,
+`verify:browser` использует собственную зависимость `@playwright/test` и
+установленный Chrome. Скрипт проверяет обе локали, страницы проектов, контакты,
 переключение темы/языка, 404 и ширины 320/390/820/1440. Для запуска нужен
-Playwright с установленным Chromium. Если он уже доступен вне этого проекта,
-задайте `PORTFOLIO_PLAYWRIGHT_MODULE` абсолютным путём к `@playwright/test`;
-скрипт не меняет этот runtime или его репозиторий.
+Chrome; другой канал можно передать через `PORTFOLIO_PLAYWRIGHT_CHANNEL`.
+Для занятого порта запустите Next.js на свободном порту и передайте точный origin
+через `PORTFOLIO_BASE_URL` — тест не завершает чужие процессы.
 
 ## Публикация
 
@@ -69,7 +87,12 @@ Playwright с установленным Chromium. Если он уже дост
 Без него, а также в Vercel Preview, сайт остаётся noindex. Контакты публичны;
 секреты, БД, ключи аналитики не требуются.
 
-## Происхождение
+## GitHub и происхождение
+
+`origin`: https://github.com/godaylor/personal-portfolio.git, ветка `main`.
+Локальная история содержит отдельный импорт MIT-шаблона и последующую
+самостоятельную переработку, поэтому происхождение прослеживается по commit history.
 
 Основа сайта — Magic UI Portfolio, адаптированная для Максима Жупарова.
-[LICENSE](LICENSE) и [ATTRIBUTION.md](ATTRIBUTION.md) сохранены.
+[LICENSE](LICENSE), [ATTRIBUTION.md](ATTRIBUTION.md) и
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) сохранены.

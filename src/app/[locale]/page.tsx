@@ -47,8 +47,8 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
 
           <BlurFade delay={0.1}>
             <h1 id="hero-title">
-              {t("Создаю", "I build")}
-              <span>{t(" веб-интерфейсы.", " web interfaces.")}</span>
+              {t("Создаю интерфейсы,", "I build interfaces")}
+              <span>{t(" которые ведут к результату.", " that move work forward.")}</span>
             </h1>
           </BlurFade>
 
@@ -57,8 +57,11 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
           </BlurFade>
 
           <BlurFade delay={0.22}>
+            <ul className="hero__proof" aria-label={t("Коротко о портфолио", "Portfolio at a glance")}>
+              {DATA.proofPoints.map((point) => <li key={point}>{point}</li>)}
+            </ul>
             <div className="hero__stack" aria-label={t("Основной стек", "Primary stack")}>
-              <span>{DATA.stackLine}</span>
+              <span translate="no">{DATA.stackLine}</span>
               <span>{t("От сценария до интерфейса", "From journey to interface")}</span>
             </div>
           </BlurFade>
@@ -151,7 +154,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
 
       <footer className="site-footer">
         <p>{DATA.name} · {t("Персональное портфолио", "Personal portfolio")}</p>
-        <p>React · TypeScript · Next.js</p>
+        <p translate="no">React · TypeScript · Next.js</p>
       </footer>
     </main>
   );

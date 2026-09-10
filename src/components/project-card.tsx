@@ -36,7 +36,7 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
         </div>
 
         <div className="project-card__copy">
-          <h3>
+          <h3 translate="no">
             <Link href={localizedPath(locale, `/work/${project.slug}`)}>{project.title}</Link>
           </h3>
           <p>{project.summary}</p>
@@ -44,7 +44,7 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
 
         <div className="project-card__footer">
           {project.stack.length > 0 ? (
-            <ul aria-label={`${project.title}: ${translate(locale, "технологии", "technologies")}`}>
+            <ul translate="no" aria-label={`${project.title}: ${translate(locale, "технологии", "technologies")}`}>
               {project.stack.slice(0, 4).map((technology) => (
                 <li key={technology}>{technology}</li>
               ))}
