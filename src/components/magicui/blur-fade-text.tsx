@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import { useMemo } from "react";
 
 interface BlurFadeTextProps {
@@ -17,6 +17,7 @@ interface BlurFadeTextProps {
   yOffset?: number;
   animateByCharacter?: boolean;
 }
+
 const BlurFadeText = ({
   text,
   className,
@@ -27,30 +28,36 @@ const BlurFadeText = ({
   yOffset = 8,
   animateByCharacter = false,
 }: BlurFadeTextProps) => {
+  const reduceMotion = useReducedMotion();
   const defaultVariants: Variants = {
-    hidden: { y: -yOffset, opacity: 0, filter: "blur(8px)" },
-    visible: { y: 0, opacity: 1, filter: "blur(0px)" },
+    hidden: { y: -yOffset, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
   };
   const combinedVariants = variant || defaultVariants;
   const characters = useMemo(() => Array.from(text), [text]);
 
+  if (reduceMotion) {
+    return <span className={className}>{text}</span>;
+  }
+
   if (animateByCharacter) {
     return (
       <div className="flex">
-        {characters.map((char, i) => {
+        {characters.map((char, index) => {
           const charVariants: Variants = {
-            hidden: { y: -yOffset, opacity: 0, filter: "blur(8px)" },
-            visible: { y: 0, opacity: 1, filter: "blur(0px)" },
+            hidden: { y: -yOffset, opacity: 0 },
+            visible: { y: 0, opacity: 1 },
           };
+
           return (
             <motion.span
-              key={i}
+              key={index}
               initial="hidden"
               animate="visible"
               variants={charVariants}
               transition={{
                 duration,
-                delay: delay + i * characterDelay,
+                delay: delay + index * characterDelay,
                 ease: "easeOut",
               }}
               className={cn("inline-block", className)}

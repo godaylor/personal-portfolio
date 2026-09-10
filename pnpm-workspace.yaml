@@ -1,4 +1,11 @@
-allowBuilds:
-  esbuild: true
-  sharp: true
-  unrs-resolver: true
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - unrs-resolver
+
+# Security fixes for the existing MDX build pipeline. Keep these until upstream
+# packages raise their ranges; verify serialization and MDX bundling on upgrades.
+overrides:
+  "@content-collections/core>serialize-javascript": "7.0.5"
+  "mdx-bundler>uuid": "11.1.1"
+  "remark-mdx-frontmatter>toml": "4.2.0"

@@ -19,6 +19,10 @@ export function MediaContainer({
         <img
           src={src}
           alt={alt}
+          width={1200}
+          height={675}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-center max-w-full max-h-full"
         />
       ) : (

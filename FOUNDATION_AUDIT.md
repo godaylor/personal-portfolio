@@ -2,6 +2,9 @@
 
 Дата проверки: 2026-08-28.
 
+> Этот документ фиксирует состояние очищенной foundation до персонализации.
+> Актуальная production-shell итерация описана в конце файла.
+
 ## Структура
 
 - `src/app/` — Next.js App Router, layout, metadata, Open Graph и маршруты.
@@ -22,7 +25,8 @@
 
 - Персональные данные, контакты, навыки, опыт, образование и проекты находятся в
   `src/data/resume.tsx`.
-- Проекты хранятся в `DATA.projects`; сейчас массив пуст.
+- Проекты собираются из подтверждённых записей `src/data/projects.ts` через
+  `getProjects(locale)`; неподтверждённые URL и медиа остаются пустыми.
 - Основные анимации находятся в `src/components/magicui/blur-fade.tsx`,
   `blur-fade-text.tsx`, `flickering-grid.tsx` и `dock.tsx`.
 - Анимационный runtime — уже существующая зависимость `motion`; новые библиотеки
@@ -37,14 +41,14 @@
 - MDX/blog pipeline и security headers из `next.config.mjs`.
 - Текстовые Open Graph generators без avatar/media.
 
-## Что ещё нужно преобразовать
+## Что ещё нужно перед публикацией
 
-- Заменить placeholders только подтверждёнными данными владельца.
-- Решить, нужны ли work, education, skills и blog в финальной версии.
-- Добавить проекты без выдуманных результатов, дат и технологий.
-- Настроить production domain, index/follow и финальные SEO/OG тексты перед
-  публикацией.
-- Финальный визуальный редизайн намеренно не выполнялся.
+- Добавить production domain и задать `NEXT_PUBLIC_SITE_URL` в Vercel.
+- Подключить GitHub remote портфолио и разрешить GitHub Actions.
+- При необходимости добавить подтверждённые location, avatar, résumé, work и
+  education; текущая версия публикуется без них.
+- Добавить только собственные GitHub/live URL, скриншоты и видео проектов после
+  их публикации или разрешения.
 
 ## Внешние зависимости и ссылки
 
@@ -62,9 +66,11 @@
 - Опыт, образование, навыки и резюме.
 - Для каждого проекта: название, роль, описание, даты, технологии, repository,
   live URL и разрешённые изображения или видео.
-- Email, телефон и социальные профили, которые разрешено публиковать.
+- Email и социальные профили, которые разрешено публиковать: email, Telegram и
+  GitHub уже подтверждены и добавлены.
 - Аватар или решение работать без него.
-- Production domain, SEO title/description и пожелания по языкам.
+- Production domain и пожелания по языкам; RU по умолчанию и EN-переключатель
+  уже добавлены.
 - Материалы блога, если блог остаётся.
 
 ## Проверка
@@ -76,3 +82,20 @@
 - Desktop 1440 px и mobile 390 px — hydration и responsive layout проверены.
 - `/`, `/blog` и favicon отвечают HTTP 200.
 - Console/network errors отсутствуют; HTML-изображений нет.
+
+## Production portfolio shell
+
+После foundation-аудита основа была существенно адаптирована:
+
+- добавлены hero, about, grouped stack, compact background и contact CTA;
+- Selected Work стал главным блоком с единой сеткой из восьми карточек;
+- добавлена типизированная project data architecture и маршруты
+  `/[locale]/work/[slug]` для восьми case studies на двух языках;
+- placeholders не содержат выдуманных метрик, пользователей, результатов или
+  неподтверждённого стека;
+- добавлены responsive media fallbacks, semantic headings/landmarks,
+  keyboard focus, reduced motion, production metadata и branded Open Graph;
+- созданы QA screenshots для desktop 1440 px, tablet 820 px и mobile 390 px.
+
+Актуальные проверки, включая responsive browser smoke, MDX и dependency audit,
+зафиксированы в `docs/VERIFICATION.md`.

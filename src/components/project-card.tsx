@@ -1,143 +1,76 @@
-/* eslint-disable @next/next/no-img-element */
-"use client";
-
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { ArrowUpRight } from "lucide-react";
+import { localizedPath, translate, type Locale } from "@/lib/i18n";
+import { ProjectMedia } from "@/components/project-media";
+import type { PortfolioProject } from "@/data/resume";
+import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import Markdown from "react-markdown";
 
-function ProjectImage({ src, alt }: { src: string; alt: string }) {
-  const [imageError, setImageError] = useState(false);
+type ProjectCardProps = {
+  locale: Locale;
+  project: PortfolioProject;
+  priority?: boolean;
+};
 
-  if (!src || imageError) {
-    return <div className="w-full h-48 bg-muted" />;
+function LinkIcon({ label }: { label: PortfolioProject["links"][number]["label"] }) {
+  if (label === "GitHub") {
+    return <Github aria-hidden="true" />;
   }
 
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className="w-full h-48 object-cover"
-      onError={() => setImageError(true)}
-    />
-  );
+  return <ExternalLink aria-hidden="true" />;
 }
 
-interface Props {
-  title: string;
-  href?: string;
-  description: string;
-  dates: string;
-  tags: readonly string[];
-  link?: string;
-  image?: string;
-  video?: string;
-  links?: readonly {
-    icon: React.ReactNode;
-    type: string;
-    href: string;
-  }[];
-  className?: string;
-}
-
-export function ProjectCard({
-  title,
-  href,
-  description,
-  dates,
-  tags,
-  link,
-  image,
-  video,
-  links,
-  className,
-}: Props) {
+export function ProjectCard({ project, locale, priority = false }: ProjectCardProps) {
   return (
-    <div
-      className={cn(
-        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200",
-        className
-      )}
-    >
-      <div className="relative shrink-0">
-        <Link
-          href={href || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-        >
-          {video ? (
-            <video
-              src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-48 object-cover"
-            />
-          ) : image ? (
-            <ProjectImage src={image} alt={title} />
+    <article className="project-card group">
+      <Link
+        href={localizedPath(locale, `/work/${project.slug}`)}
+        className="project-card__media-link"
+        aria-label={`${translate(locale, "О проекте", "Read about")} ${project.title}`}
+      >
+        <ProjectMedia locale={locale} project={project} priority={priority} />
+      </Link>
+
+      <div className="project-card__body">
+        <div className="project-card__meta">
+          <span>{project.status}</span>
+          <ArrowUpRight aria-hidden="true" />
+        </div>
+
+        <div className="project-card__copy">
+          <h3>
+            <Link href={localizedPath(locale, `/work/${project.slug}`)}>{project.title}</Link>
+          </h3>
+          <p>{project.summary}</p>
+        </div>
+
+        <div className="project-card__footer">
+          {project.stack.length > 0 ? (
+            <ul aria-label={`${project.title}: ${translate(locale, "технологии", "technologies")}`}>
+              {project.stack.slice(0, 4).map((technology) => (
+                <li key={technology}>{technology}</li>
+              ))}
+            </ul>
           ) : (
-            <div className="w-full h-48 bg-muted" />
+            <span className="project-card__pending">{translate(locale, "Стек уточняется", "Stack pending")}</span>
           )}
-        </Link>
-        {links && links.length > 0 && (
-          <div className="absolute top-2 right-2 flex flex-wrap gap-2">
-            {links.map((link, idx) => (
-              <Link
-                href={link.href}
-                key={idx}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Badge
-                  className="flex items-center gap-1.5 text-xs bg-black text-white hover:bg-black/90"
-                  variant="default"
+
+          {project.links.length > 0 ? (
+            <div className="project-card__links">
+              {project.links.map((link) => (
+                <a
+                  href={link.href}
+                  key={link.label}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${project.title}: ${link.label}`}
                 >
-                  {link.icon}
-                  {link.type}
-                </Badge>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="p-6 flex flex-col gap-3 flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex flex-col gap-1">
-            <h3 className="font-semibold">{title}</h3>
-            <time className="text-xs text-muted-foreground">{dates}</time>
-          </div>
-          <Link
-            href={href || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-            aria-label={`Open ${title}`}
-          >
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </Link>
+                  <LinkIcon label={link.label} />
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          ) : null}
         </div>
-        <div className="text-xs flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-          <Markdown>{description}</Markdown>
-        </div>
-        {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-auto">
-            {tags.map((tag) => (
-              <Badge
-                key={tag}
-                className="text-[11px] font-medium border border-border h-6 w-fit px-2"
-                variant="outline"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
       </div>
-    </div>
+    </article>
   );
 }
