@@ -25,20 +25,28 @@
   ветка — `main`.
 - Локальная папка связана с Vercel project id через `.vercel/project.json`
   (файл игнорируется Git).
-- Сохранённая GitHub CLI-сессия недействительна; Vercel CLI в PATH отсутствует.
-  Поэтому push, настройка GitHub About и production deploy в текущем проходе
-  объективно нельзя подтвердить без входа владельца.
+- Сохранённая GitHub CLI-сессия недействительна; push и GitHub About требуют
+  повторного входа владельца.
+- Vercel production deployment `dpl_3H7jGtrS7drRKFPQFjd4tYcbmG2n` имеет статус
+  Ready и aliases `personal-portfolio-omega-ten-12.vercel.app` и
+  `personal-portfolio-maxeem.vercel.app`.
+- `NEXT_PUBLIC_SITE_URL` установлен в стабильный alias
+  `https://personal-portfolio-maxeem.vercel.app`.
+- Deployment Protection сейчас имеет значение `all_except_custom_domains`,
+  поэтому анонимный посетитель перенаправляется на Vercel Login. Для публичного
+  релиза нужно явно одобренное переключение Vercel Authentication на `preview`;
+  preview deployments останутся защищёнными.
 
 ## Что нужно для фактической публикации
 
 Эта конфигурация не требует платной базы данных, API-ключей или внешнего
 сервиса. Тариф и лимиты Vercel зависят от аккаунта владельца.
 
-1. Восстановить CLI-вход владельца в GitHub и Vercel на этом компьютере.
-2. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
-3. В связанном Vercel project выбрать URL или собственный домен.
-4. Указать origin в Production environment и выполнить deploy.
-5. На реальном URL проверить обе локали, все проекты, контакты, 404, OG,
+1. Явно разрешить смену Vercel Authentication с `all_except_custom_domains` на
+   `preview`, чтобы открыть production и сохранить защиту preview.
+2. Восстановить CLI-вход владельца в GitHub на этом компьютере.
+3. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
+4. На публичном URL проверить обе локали, все проекты, контакты, 404, OG,
    canonical/hreflang, robots/sitemap, HTTPS и мобильный вид.
 
 ## GitHub About после входа

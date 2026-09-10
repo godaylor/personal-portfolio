@@ -64,8 +64,10 @@ frozen install, lint, MDX smoke, build и полный browser smoke. `origin` �
 
 ## Границы проверки
 
-Фактический новый Vercel deploy, production origin/DNS, индексация на реальном домене,
-реальная доставка email и полная проверка screen reader не выполнялись.
+Новый Vercel deployment создан и имеет статус Ready. Stable alias пока не прошёл
+анонимную проверку: Vercel Authentication перенаправляет посетителя на login из-за
+режима `all_except_custom_domains`. Индексация, реальная доставка email и полная
+проверка screen reader не выполнялись.
 Другие приложения портфолио не запускались и не проходили повторный аудит.
 Скриншоты самих проектов и публичные demo URLs отсутствуют намеренно.
 Оставшиеся действия и доступы — в PUBLICATION.md.
