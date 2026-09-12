@@ -1,10 +1,10 @@
-# Локальная проверка готовности — 2026-09-11
+# Проверка готовности — 2026-09-12
 
 Среда: Windows, Node 22.15.1, pnpm 10.15.1, Next.js 16.3.4.
 Финальная проверка выполнена на production server http://127.0.0.1:32802.
 Порты 32800–32801 были заняты, поэтому выбран свободный 32802; чужие процессы и Docker
 не останавливались и не изменялись.
-Соседние репозитории не изменялись. Commit/push/deploy не выполнялись.
+Соседние репозитории не изменялись. Чужие процессы и Docker не затрагивались.
 
 ## Результат
 
@@ -64,10 +64,19 @@ frozen install, lint, MDX smoke, build и полный browser smoke. `origin` �
 
 ## Границы проверки
 
-Новый Vercel deployment создан и имеет статус Ready. Stable alias пока не прошёл
-анонимную проверку: Vercel Authentication перенаправляет посетителя на login из-за
-режима `all_except_custom_domains`. Индексация, реальная доставка email и полная
-проверка screen reader не выполнялись.
+Production deployment `dpl_3H7jGtrS7drRKFPQFjd4tYcbmG2n` имеет статус Ready.
+Stable alias `https://personal-portfolio-maxeem.vercel.app` проверен анонимно
+через curl и новый Playwright browser context без cookies: `/`, `/en` и
+`/work/napoli` вернули HTTP 200 без перехода на login, имеют правильные lang,
+один h1 и индексируемую robots meta. robots.txt и sitemap.xml вернули HTTP 200,
+несуществующий маршрут — HTTP 404.
+
+Vercel Authentication переключена только на `preview`. Для доказательной
+проверки создан preview deployment `dpl_7hYsFQ4MV1jYqWaxmanFd5khYXpM`: анонимный
+запрос вернул HTTP 302 на Vercel SSO, а свежий browser context оказался на
+Vercel Login. Password protection и прочие защиты проекта не изменялись.
+
+Реальная доставка email и полная проверка screen reader не выполнялись.
 Другие приложения портфолио не запускались и не проходили повторный аудит.
 Скриншоты самих проектов и публичные demo URLs отсутствуют намеренно.
 Оставшиеся действия и доступы — в PUBLICATION.md.

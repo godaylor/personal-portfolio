@@ -45,8 +45,8 @@ and indexing.
 ## URLs
 
 - **GitHub:** https://github.com/godaylor/personal-portfolio
-- **Live:** https://personal-portfolio-maxeem.vercel.app — deployment is Ready,
-  but public access is currently blocked by Vercel Authentication.
+- **Live:** https://personal-portfolio-maxeem.vercel.app — public production,
+  anonymously verified on 12 September 2026.
 
 ## Best screenshots
 
@@ -70,9 +70,10 @@ The production build and complete local browser scenario work: both locales,
 all 16 localized project pages, theme/language transitions, copy feedback,
 contacts, 404, responsive widths, OG/icon/robots/sitemap and runtime error checks.
 Vercel deployment `dpl_3H7jGtrS7drRKFPQFjd4tYcbmG2n` is Ready and assigned to
-the stable production alias. Manual anonymous access redirects to Vercel Login
-because project protection is `all_except_custom_domains`. Preview-only
-protection is the prepared public-release setting; do not mark public deployment
-complete until the owner explicitly approves that security-policy change and an
-anonymous browser pass succeeds. The saved GitHub CLI credential also remains
-invalid, so commit `e09b925` is local until GitHub authentication is restored.
+the stable production alias. Vercel Authentication is set to `preview`: the
+production home, English home and case-study route return HTTP 200 in a fresh
+browser context without cookies, while preview deployment
+`dpl_7hYsFQ4MV1jYqWaxmanFd5khYXpM` redirects anonymous visitors to Vercel Login.
+Password protection and the remaining project protections were not changed. The
+saved GitHub CLI credential remains invalid, so the local release commits still
+need to be pushed after GitHub authentication is restored.

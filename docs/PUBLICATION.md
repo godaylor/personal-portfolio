@@ -32,22 +32,23 @@
   `personal-portfolio-maxeem.vercel.app`.
 - `NEXT_PUBLIC_SITE_URL` установлен в стабильный alias
   `https://personal-portfolio-maxeem.vercel.app`.
-- Deployment Protection сейчас имеет значение `all_except_custom_domains`,
-  поэтому анонимный посетитель перенаправляется на Vercel Login. Для публичного
-  релиза нужно явно одобренное переключение Vercel Authentication на `preview`;
-  preview deployments останутся защищёнными.
+- Vercel Authentication имеет значение `preview`: production alias публичен,
+  а preview deployments остаются защищёнными. Password protection и остальные
+  защиты проекта не изменялись.
+- 12 сентября 2026 года production `/`, `/en`, `/work/napoli`, robots и sitemap
+  анонимно вернули HTTP 200; корректная 404 вернула HTTP 404. Отдельный preview
+  `personal-portfolio-8r7h9tm9t-maxeem.vercel.app` вернул HTTP 302 на Vercel SSO.
 
-## Что нужно для фактической публикации
+## Что осталось после публикации
 
 Эта конфигурация не требует платной базы данных, API-ключей или внешнего
 сервиса. Тариф и лимиты Vercel зависят от аккаунта владельца.
 
-1. Явно разрешить смену Vercel Authentication с `all_except_custom_domains` на
-   `preview`, чтобы открыть production и сохранить защиту preview.
-2. Восстановить CLI-вход владельца в GitHub на этом компьютере.
-3. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
-4. На публичном URL проверить обе локали, все проекты, контакты, 404, OG,
-   canonical/hreflang, robots/sitemap, HTTPS и мобильный вид.
+1. Восстановить CLI-вход владельца в GitHub на этом компьютере.
+2. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
+3. Обновить GitHub About: description, website и topics из раздела ниже.
+4. После публикации самостоятельных проектов добавить подтверждённые demo URLs
+   и разрешённые скриншоты в финальной синхронизации портфолио.
 
 ## GitHub About после входа
 
