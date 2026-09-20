@@ -46,7 +46,7 @@ and indexing.
 
 - **GitHub:** https://github.com/godaylor/personal-portfolio
 - **Live:** https://personal-portfolio-maxeem.vercel.app — public production,
-  anonymously verified on 12 September 2026.
+  anonymously verified on 20 September 2026.
 
 ## Best screenshots
 
@@ -69,12 +69,12 @@ presented as original work.
 The production build and complete local browser scenario work: both locales,
 all 14 localized project pages, theme/language transitions, copy feedback,
 contacts, 404, responsive widths, OG/icon/robots/sitemap and runtime error checks.
-Vercel deployment `dpl_3H7jGtrS7drRKFPQFjd4tYcbmG2n` is Ready and assigned to
+Vercel deployment `dpl_6x8eQJPxWkhutyRrjgJEqy1yUVVt` is Ready and assigned to
 the stable production alias. Vercel Authentication is set to `preview`: the
-production home, English home and case-study route return HTTP 200 in a fresh
-browser context without cookies, while preview deployment
+production home, English home and Folio case study open in a fresh browser
+without sign-in, while an anonymous request to preview deployment
 `dpl_7hYsFQ4MV1jYqWaxmanFd5khYXpM` redirects anonymous visitors to Vercel Login.
 Password protection and the remaining project protections were not changed. The
-The 2026-09-20 content pass verifies 6 GitHub/Live pairs over HTTPS, imports 7
+2026-09-20 content pass verifies 6 GitHub/Live pairs over HTTPS, imports 7
 approved release screenshots and removes project 03 from public data, pages and
 the sitemap. ReplayLab has no invented repository or Live URL.

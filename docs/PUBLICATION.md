@@ -27,7 +27,7 @@
   (файл игнорируется Git).
 - Сохранённая GitHub CLI-сессия недействительна; push и GitHub About требуют
   повторного входа владельца.
-- Vercel production deployment `dpl_3H7jGtrS7drRKFPQFjd4tYcbmG2n` имеет статус
+- Vercel production deployment `dpl_6x8eQJPxWkhutyRrjgJEqy1yUVVt` имеет статус
   Ready и aliases `personal-portfolio-omega-ten-12.vercel.app` и
   `personal-portfolio-maxeem.vercel.app`.
 - `NEXT_PUBLIC_SITE_URL` установлен в стабильный alias
@@ -43,10 +43,7 @@
 Эта конфигурация не требует платной базы данных, API-ключей или внешнего
 сервиса. Тариф и лимиты Vercel зависят от аккаунта владельца.
 
-1. Восстановить CLI-вход владельца в GitHub на этом компьютере.
-2. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
-3. Обновить GitHub About: description, website и topics из раздела ниже.
-4. Проект 03 добавить только после отдельного разрешения владельца, работающих
+1. Проект 03 добавить только после отдельного разрешения владельца, работающих
    GitHub/Live URL, screenshot и актуального handoff.
 
 ## GitHub About после входа

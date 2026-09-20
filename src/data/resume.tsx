@@ -57,5 +57,5 @@ export const DATA = getData("ru");
 export const OWNER_CONTENT_TODO = {
   optionalProfile: ["location", "avatarUrl", "resumeUrl", "work and education"],
   projects: ["VariantLab approval and verified publication data"],
-  publishing: ["authenticated GitHub and Vercel sessions", "production domain"],
+  publishing: [],
 } as const;
