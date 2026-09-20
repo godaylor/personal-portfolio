@@ -35,9 +35,8 @@
 - Vercel Authentication имеет значение `preview`: production alias публичен,
   а preview deployments остаются защищёнными. Password protection и остальные
   защиты проекта не изменялись.
-- 12 сентября 2026 года production `/`, `/en`, `/work/napoli`, robots и sitemap
-  анонимно вернули HTTP 200; корректная 404 вернула HTTP 404. Отдельный preview
-  `personal-portfolio-8r7h9tm9t-maxeem.vercel.app` вернул HTTP 302 на Vercel SSO.
+- После production deploy обязательны anonymous browser smoke для `/`, `/en`,
+  case studies, robots/sitemap и 404, а также отдельная проверка preview → Vercel SSO.
 
 ## Что осталось после публикации
 
@@ -47,12 +46,12 @@
 1. Восстановить CLI-вход владельца в GitHub на этом компьютере.
 2. Push локальной `main` в настроенный `origin`; убедиться, что CI зелёный.
 3. Обновить GitHub About: description, website и topics из раздела ниже.
-4. После публикации самостоятельных проектов добавить подтверждённые demo URLs
-   и разрешённые скриншоты в финальной синхронизации портфолио.
+4. Проект 03 добавить только после отдельного разрешения владельца, работающих
+   GitHub/Live URL, screenshot и актуального handoff.
 
 ## GitHub About после входа
 
-- **Description:** `Bilingual product-minded frontend portfolio with 8 React case studies, accessible UX and end-to-end browser verification.`
+- **Description:** `Frontend / Full-stack portfolio with 7 verified React case studies, 6 live products and end-to-end browser verification.`
 - **Website:** точный production HTTPS URL после Vercel deploy.
 - **Topics:** `portfolio`, `frontend`, `react`, `nextjs`, `typescript`,
   `accessibility`, `i18n`, `playwright`, `case-study`.
@@ -67,14 +66,9 @@
 город/часовой пояс, фотография, PDF-резюме, опыт и образование с датами.
 Эти поля не блокируют текущую версию сайта.
 
-Для более подробных кейсов нужны описание личного вклада, задачи и решения,
-разрешённые скриншоты/видео, подтверждённые URL репозиториев каждого проекта.
-Публичные демо добавляются после собственного deploy проектов.
-
-Обновлять `PROJECT_PUBLICATION` в `src/data/projects.ts`: `links`, `cover.src`.
-Статус демо автоматически меняется при добавлении ссылки с label `Live demo`.
-Описания редактируются в полях `ru` и `en` соответствующей записи.
-URL и обложки следует хранить в общих полях записи проекта, а текст — в локалях.
+Актуальные links, covers и RU/EN copy находятся в `src/data/projects.ts`.
+Добавлять нужно только URL, которые независимо отвечают по HTTPS, и screenshots
+из release evidence самого проекта. Не использовать upstream demos.
 Имена и контакты: `src/data/resume.tsx`.
 Не использовать localhost и upstream demos в публичных ссылках.
 

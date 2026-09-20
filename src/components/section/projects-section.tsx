@@ -6,17 +6,15 @@ import { translate, type Locale } from "@/lib/i18n";
 export default function ProjectsSection({ locale }: { locale: Locale }) {
   const DATA = getData(locale);
   const t = (ru: string, en: string) => translate(locale, ru, en);
-  const projects = [...DATA.projects].sort(
-    (a, b) => Number(b.slug === "napoli") - Number(a.slug === "napoli")
-  );
+  const projects = DATA.projects;
 
   return (
     <div className="projects-section">
       <SectionHeading
         eyebrow={t("Проекты", "Selected work")}
-        title={t("Веб-продукты и их устройство.", "Web products, inside and out.")}
+        title={t("Приложения, которые можно открыть и проверить.", "Applications you can open and inspect.")}
         titleId="selected-work-title"
-        description={t("Восемь продуктовых кейсов. На каждой странице — текущий объём, инженерные решения, происхождение кода и следующий шаг к релизу.", "Eight product case studies. Each page shows the current scope, engineering decisions, code origins and the next release step.")}
+        description={t("7 проверенных кейсов: 6 production-приложений и 1 локальный release. Внутри — мой вклад, стек, инженерные результаты и честные границы.", "7 verified case studies: 6 production applications and 1 local release. Each one shows my contribution, stack, engineering outcomes and honest boundaries.")}
       />
 
       <div className="featured-projects" aria-label={t("Все проекты", "All projects")}>

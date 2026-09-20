@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
     sameAs: [DATA.githubUrl, DATA.contact.telegram],
     jobTitle: DATA.role,
     description: DATA.description,
-    knowsAbout: ["React", "TypeScript", "Next.js", "Frontend development"],
+    knowsAbout: ["React", "TypeScript", "Next.js", "Node.js", "PostgreSQL", "Frontend development", "Full-stack development"],
   }).replace(/</g, "\\u003c");
 
   return (
@@ -47,8 +47,8 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
 
           <BlurFade delay={0.1}>
             <h1 id="hero-title">
-              {t("Создаю интерфейсы,", "I build interfaces")}
-              <span>{t(" которые ведут к результату.", " that move work forward.")}</span>
+              {t("Создаю веб-продукты", "I build web products")}
+              <span>{t(" от интерфейса до production.", " from interface to production.")}</span>
             </h1>
           </BlurFade>
 
@@ -116,7 +116,7 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
             eyebrow={t("Обо мне", "About")}
             title={t("Интерфейсы в контексте продукта.", "Interfaces in a product context.")}
             titleId="about-title"
-            description={t("Меня зовут Максим Жупаров. Занимаюсь веб-разработкой; ниже — направления работы и технические решения из моих проектов.", "I’m Maksim Zhuparov. I work on web applications; below are the focus areas and technical decisions from my projects.")}
+            description={t("Меня зовут Максим Жупаров. Я Frontend / Full-stack разработчик: работаю с интерфейсами, API, данными и проверкой production-сценариев.", "I’m Maksim Zhuparov, a Frontend / Full-stack developer working across interfaces, APIs, data and production verification.")}
           />
           <div className="about-grid">
             {DATA.about.map((item) => (

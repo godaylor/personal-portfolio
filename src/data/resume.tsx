@@ -2,12 +2,11 @@ import { getProjects } from "./projects";
 import { translate, type Locale } from "@/lib/i18n";
 
 export type ProjectStatus = string;
-export type ProjectLink = { label: "Live demo" | "GitHub" | "Case study"; href: string };
+export type ProjectLink = { label: "Live" | "GitHub"; href: string };
 export type PortfolioProject = {
   slug: string; title: string; featured: boolean; status: ProjectStatus;
-  summary: string; description: string; stack: string[];
-  engineeringChallenges: string[]; architectureHighlights: string[];
-  currentScope: string[]; nextStep: string;
+  summary: string; description: string; contribution: string; stack: string[];
+  results: string[]; architectureHighlights: string[]; boundaries: string;
   links: ProjectLink[]; cover: { src: string; alt: string };
   visual: "cobalt" | "violet" | "cyan" | "coral" | "lime";
 };
@@ -18,14 +17,14 @@ export function getData(locale: Locale) {
   return {
     name: t("Максим Жупаров", "Maksim Zhuparov"), initials: t("МЖ", "MZ"),
     url: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:32800").replace(/\/$/, ""),
-    role: t("Фронтенд-разработчик", "Frontend Developer"),
-    stackLine: "React / TypeScript / Next.js",
-    description: t("Портфолио Максима Жупарова: веб-интерфейсы, пользовательские сценарии и проекты на React и TypeScript.", "Maksim Zhuparov’s portfolio: web interfaces, user journeys and projects built with React and TypeScript."),
-    positioning: t("Проектирую пользовательский путь, связываю интерфейс с данными и проверяю сценарий до результата — на примере восьми продуктовых проектов.", "I design the user journey, connect the interface to data and verify the path to an outcome across eight product projects."),
+    role: t("Frontend / Full-stack разработчик", "Frontend / Full-stack Developer"),
+    stackLine: "React / TypeScript / Node.js / PostgreSQL",
+    description: t("Портфолио Максима Жупарова — Frontend / Full-stack разработчика React и TypeScript с production-проектами.", "Maksim Zhuparov’s portfolio — a Frontend / Full-stack React and TypeScript developer with production projects."),
+    positioning: t("Ищу Frontend / Full-stack роль. Проектирую понятные интерфейсы, связываю их с API и данными и довожу пользовательский путь до проверенного production.", "I’m looking for a Frontend / Full-stack role. I design clear interfaces, connect them to APIs and data, and carry the user journey through verified production."),
     proofPoints: [
-      t("8 продуктовых кейсов", "8 product case studies"),
-      t("Русский и English", "English and русский"),
-      t("Адаптивность и доступность", "Responsive and accessible"),
+      t("6 публичных приложений", "6 public applications"),
+      t("7 проверенных кейсов", "7 verified case studies"),
+      t("RU / EN · desktop / mobile", "RU / EN · desktop / mobile"),
     ],
     location: "", avatarUrl: "", resumeUrl: "",
     githubUrl: "https://github.com/godaylor",
@@ -37,16 +36,16 @@ export function getData(locale: Locale) {
       { href: "#contact", label: t("Контакты", "Contact") },
     ],
     about: [
-      { title: t("Пользовательские сценарии", "User journeys"), description: t("В проектах рассматриваю весь путь пользователя: выбор, ввод данных, подтверждение и восстановление после ошибки.", "My projects explore the whole user journey: selection, data entry, confirmation and recovery from errors.") },
-      { title: t("Интерфейс и данные", "Interface and data"), description: t("Работаю с URL-состоянием, клиентским хранением и серверными данными. Конкретные решения описаны на страницах проектов.", "I work with URL state, client persistence and server data. Project pages describe the implementation choices.") },
-      { title: t("Разные форматы продуктов", "Different product formats"), description: t("В портфолио есть commerce-сценарии, аналитические панели, редакторы и инструменты операционного реагирования.", "The portfolio includes commerce journeys, analytics dashboards, editors and operational response tools.") },
-      { title: t("Открытые источники", "Open-source foundations"), description: t("Часть проектов развивает открытые и учебные основы. Их происхождение указано в описаниях, а лицензии сохранены.", "Some projects build on open-source and educational foundations. Their origins are credited and licenses are preserved.") },
+      { title: t("Frontend как продукт", "Product-minded frontend"), description: t("Проектирую путь пользователя, состояния, ошибки и восстановление — не только отдельные экраны.", "I design the user journey, states, failures and recovery—not isolated screens.") },
+      { title: t("API и данные", "APIs and data"), description: t("Работаю с Node.js API, PostgreSQL, Supabase, auth, realtime и local-first архитектурой.", "I work with Node.js APIs, PostgreSQL, Supabase, auth, realtime and local-first architecture.") },
+      { title: t("Production-подход", "Production mindset"), description: t("Проверяю критические сценарии браузером, документирую границы и публикую только подтверждённые возможности.", "I verify critical journeys in the browser, document boundaries and publish only confirmed capabilities.") },
+      { title: t("Честное происхождение", "Clear provenance"), description: t("Отделяю собственный вклад от open-source основы, сохраняю лицензии и не выдаю upstream за свою работу.", "I separate my contribution from open-source foundations, retain licenses and never present upstream work as my own.") },
     ],
     skillGroups: [
       { title: "Frontend", skills: ["React", "TypeScript", "JavaScript", "Next.js"], note: "" },
-      { title: t("Состояние и данные", "State and data"), skills: ["Redux Toolkit", "TanStack Query", "Zustand", "React Context"], note: "" },
-      { title: t("Интерфейсы", "Interfaces"), skills: ["React Router", "Tailwind CSS", "Ant Design", "Chart.js"], note: "" },
-      { title: t("Инструменты проектов", "Project tooling"), skills: ["Vite", "Git", "ESLint", "Playwright"], note: "" },
+      { title: t("Backend и данные", "Backend and data"), skills: ["Node.js", "Hono", "PostgreSQL", "Supabase"], note: "" },
+      { title: t("Состояние и realtime", "State and realtime"), skills: ["Redux Toolkit", "TanStack Query", "Zustand", "WebSocket", "Yjs"], note: "" },
+      { title: t("Качество и delivery", "Quality and delivery"), skills: ["Playwright", "Vitest", "GitHub Actions", "Vercel", "Docker"], note: "" },
     ],
     work: [] as Array<{ company: string; title: string; period: string; description: string }>,
     education: [] as Array<{ school: string; degree: string; period: string }>,
@@ -57,6 +56,6 @@ export function getData(locale: Locale) {
 export const DATA = getData("ru");
 export const OWNER_CONTENT_TODO = {
   optionalProfile: ["location", "avatarUrl", "resumeUrl", "work and education"],
-  projects: ["public repository URLs", "live demo URLs", "approved screenshots or video", "individual contribution details"],
+  projects: ["VariantLab approval and verified publication data"],
   publishing: ["authenticated GitHub and Vercel sessions", "production domain"],
 } as const;

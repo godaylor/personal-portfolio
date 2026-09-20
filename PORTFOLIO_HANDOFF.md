@@ -2,9 +2,9 @@
 
 ## Product
 
-- **Final name:** Maksim Zhuparov — Frontend Portfolio
-- **Short description:** A bilingual, product-minded frontend portfolio that
-  turns 8 application projects into concise, honest engineering case studies.
+- **Final name:** Maksim Zhuparov — Frontend / Full-stack Portfolio
+- **Short description:** A bilingual job-search portfolio presenting 7 verified
+  applications through real product screenshots and concise engineering case studies.
 - **User problem:** A recruiter, client or engineering peer can quickly
   understand what Maksim builds, how each product works, what is verified and
   how to contact him.
@@ -24,10 +24,10 @@ Content Collections/MDX, Zod, ESLint, Playwright, GitHub Actions and Vercel.
 
 ## Main capabilities
 
-1. Product-led hero and clear work/contact paths.
-2. 8 project cards with truthful release stages and technology summaries.
-3. Dedicated RU/EN case-study pages with current scope, challenges,
-   architecture, provenance and next release step.
+1. Job-search hero with explicit Frontend / Full-stack positioning and contact path.
+2. 7 project cards: 6 public applications and 1 verified local release.
+3. Dedicated RU/EN case studies with contribution, stack, 2–4 engineering
+   outcomes, architecture, provenance and honest boundaries.
 4. URL-persistent RU/EN switching across home and project pages.
 5. System-aware light/dark theme with reduced-motion support.
 6. Accessible navigation, focus states, semantic headings and live copy feedback.
@@ -67,7 +67,7 @@ presented as original work.
 ## Production status
 
 The production build and complete local browser scenario work: both locales,
-all 16 localized project pages, theme/language transitions, copy feedback,
+all 14 localized project pages, theme/language transitions, copy feedback,
 contacts, 404, responsive widths, OG/icon/robots/sitemap and runtime error checks.
 Vercel deployment `dpl_3H7jGtrS7drRKFPQFjd4tYcbmG2n` is Ready and assigned to
 the stable production alias. Vercel Authentication is set to `preview`: the
@@ -75,5 +75,6 @@ production home, English home and case-study route return HTTP 200 in a fresh
 browser context without cookies, while preview deployment
 `dpl_7hYsFQ4MV1jYqWaxmanFd5khYXpM` redirects anonymous visitors to Vercel Login.
 Password protection and the remaining project protections were not changed. The
-saved GitHub CLI credential remains invalid, so the local release commits still
-need to be pushed after GitHub authentication is restored.
+The 2026-09-20 content pass verifies 6 GitHub/Live pairs over HTTPS, imports 7
+approved release screenshots and removes project 03 from public data, pages and
+the sitemap. ReplayLab has no invented repository or Live URL.

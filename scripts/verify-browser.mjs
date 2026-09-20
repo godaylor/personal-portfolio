@@ -4,7 +4,15 @@ import { mkdir } from "node:fs/promises";
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PORTFOLIO_PLAYWRIGHT_MODULE || "@playwright/test");
 const base = process.env.PORTFOLIO_BASE_URL || "http://127.0.0.1:32800";
-const slugs = ["relayops", "signal-studio", "variantlab", "opsweave", "replaylab", "napoli", "solecraft", "crypto-portfolio"];
+const slugs = ["relayops", "signal-studio", "opsweave", "napoli", "solecraft", "folio", "replaylab"];
+const externalLinks = {
+  relayops: ["https://relayops-godaylor.onrender.com", "https://github.com/godaylor/relayops"],
+  "signal-studio": ["https://signal-studio-smoky.vercel.app", "https://github.com/godaylor/signal-studio"],
+  opsweave: ["https://opsweave.onrender.com", "https://github.com/godaylor/opsweave"],
+  napoli: ["https://napoli-pizza-tau.vercel.app", "https://github.com/godaylor/napoli-pizza"],
+  solecraft: ["https://solecraft-two.vercel.app", "https://github.com/godaylor/solecraft"],
+  folio: ["https://folio-crypto-godaylor.maxeemzhuparov.chatgpt.site", "https://github.com/godaylor/crypto-portfolio"],
+};
 const channel = process.env.PORTFOLIO_PLAYWRIGHT_CHANNEL || "chrome";
 
 for (let attempt = 0; attempt < 30; attempt += 1) {
@@ -39,17 +47,28 @@ try {
       assert.equal(await page.locator("h1").count(), 1);
       if (path.startsWith("/work/")) {
         assert.ok(await page.locator(".case-study__next").isVisible());
-        assert.ok(await page.locator(".case-study__section").filter({ hasText: prefix ? "Current scope" : "Текущий объём" }).isVisible());
+        assert.ok(await page.locator(".case-study__section").filter({ hasText: prefix ? "My contribution" : "Мой вклад" }).isVisible());
+        assert.ok(await page.locator(".case-study__section").filter({ hasText: prefix ? "Engineering outcomes" : "Инженерные результаты" }).isVisible());
       }
       if (path === "" && !prefix) {
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Napoli" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "локально проверено");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Crypto Portfolio" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "на переработке");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "в разработке");
+        assert.equal(await page.locator(".project-card").count(), 7);
+        assert.equal(await page.locator(".project-card img").count(), 7);
+        assert.equal(await page.getByText("VariantLab", { exact: true }).count(), 0);
+        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "production");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "Signal Studio" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "production · вход");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "ReplayLab" }).locator(".project-card__meta").innerText()).toLocaleLowerCase("ru-RU"), "локальный release");
+        for (const [slug, hrefs] of Object.entries(externalLinks)) {
+          const card = page.locator(`.project-card:has(a[href="/work/${slug}"])`);
+          for (const href of hrefs) assert.equal(await card.locator(`a[href="${href}"]`).count(), 1, href);
+        }
+        assert.equal(await page.locator('.project-card:has(a[href="/work/replaylab"]) .project-card__links').count(), 0);
       }
       if (path === "" && prefix) {
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Napoli" }).locator(".project-card__meta").innerText()).toLowerCase(), "locally verified");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "Crypto Portfolio" }).locator(".project-card__meta").innerText()).toLowerCase(), "being rebuilt");
-        assert.equal((await page.locator(".project-card").filter({ hasText: "RelayOps" }).locator(".project-card__meta").innerText()).toLowerCase(), "in development");
+        assert.equal(await page.locator(".project-card").count(), 7);
+        assert.equal(await page.locator(".project-card img").count(), 7);
+        assert.equal(await page.getByText("VariantLab", { exact: true }).count(), 0);
+        assert.equal((await page.locator(".project-card").filter({ hasText: "Signal Studio" }).locator(".project-card__meta").innerText()).toLowerCase(), "production · sign-in");
+        assert.equal((await page.locator(".project-card").filter({ hasText: "ReplayLab" }).locator(".project-card__meta").innerText()).toLowerCase(), "local release");
       }
       const links = await page.locator("a[href]").evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
       for (const href of links) {
@@ -101,9 +120,11 @@ try {
   assert.notEqual(await page.locator("html").getAttribute("class"), before);
   await page.screenshot({ path: "docs/screenshots/portfolio-dark-contact.png" });
   for (const prefix of ["", "/en"]) {
-    const response = await page.goto(base + prefix + "/work/does-not-exist");
-    assert.equal(response.status(), 404);
-    assert.ok((await page.locator("h1").innerText()).includes(prefix ? "Page not found" : "Страница не найдена"));
+    for (const slug of ["does-not-exist", "variantlab"]) {
+      const response = await page.goto(base + prefix + "/work/" + slug);
+      assert.equal(response.status(), 404);
+      assert.ok((await page.locator("h1").innerText()).includes(prefix ? "Page not found" : "Страница не найдена"));
+    }
   }
   for (const path of ["/robots.txt", "/sitemap.xml", "/opengraph-image", "/icon.svg"]) {
     const response = await page.request.get(base + path);

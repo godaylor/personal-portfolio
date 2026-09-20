@@ -40,6 +40,9 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
             <Link href={localizedPath(locale, `/work/${project.slug}`)}>{project.title}</Link>
           </h3>
           <p>{project.summary}</p>
+          <ul className="project-card__results">
+            {project.results.slice(0, 2).map(result => <li key={result}>{result}</li>)}
+          </ul>
         </div>
 
         <div className="project-card__footer">
@@ -64,7 +67,7 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
                   aria-label={`${project.title}: ${link.label}`}
                 >
                   <LinkIcon label={link.label} />
-                  <span>{link.label}</span>
+                  <span>{link.label === "Live" ? translate(locale, "Live", "Live") : link.label}</span>
                 </a>
               ))}
             </div>
