@@ -47,6 +47,7 @@ try {
           await action.click();
           const popup = await popupPromise;
           await popup.waitForLoadState('domcontentloaded', { timeout: 60000 });
+          await popup.waitForFunction(() => document.body.innerText.length > 20, undefined, { timeout: 30000 });
           assert.equal(new URL(popup.url()).hostname, new URL(href).hostname);
           assert.ok((await popup.locator('body').innerText()).length > 20);
           console.log('PASS external action', href);

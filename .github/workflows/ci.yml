@@ -29,5 +29,9 @@ jobs:
         shell: bash
         run: |
           pnpm start &
-          pnpm verify:browser
-          PORTFOLIO_BASE_URL=http://127.0.0.1:32800 pnpm verify:presentations
+          for suite in verify:browser verify:presentations; do
+            if ! PORTFOLIO_BASE_URL=http://127.0.0.1:32800 pnpm "$suite" 2>&1 | tee "$RUNNER_TEMP/portfolio-browser.log"; then
+              node -e 'const fs=require("fs"); const log=fs.readFileSync(process.env.RUNNER_TEMP+"/portfolio-browser.log","utf8").split("\n").slice(-30).join("\n"); console.log("::error title=Portfolio browser failure::"+log.replace(/%/g,"%25").replace(/\r/g,"%0D").replace(/\n/g,"%0A"));'
+              exit 1
+            fi
+          done

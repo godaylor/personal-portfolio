@@ -62,9 +62,23 @@
 
 ## Публикация этого дополнения
 
-Подготовка к выпуску. Предыдущий production — `b5aca8b`; перед публикацией через
-Vercel API подтверждено `ssoProtection.deploymentType = preview`. Защиты не менялись.
-Идентификатор нового deployment и результат anonymous smoke будут записаны после выпуска.
+Основное изменение: `aa32da8281aacdc315a43834d1b11048f7955cf7`, push в `main`.
+Vercel deployment `dpl_7b8XF1xn7MtrezHjcFmeQPM79vFt` — READY production;
+API подтвердил этот git SHA и alias `personal-portfolio-maxeem.vercel.app`.
+Перед публикацией подтверждено `ssoProtection.deploymentType = preview`;
+защиты, тариф и назначение публикации не менялись.
+
+Полный `scripts/verify-production.mjs` прошёл на основном публичном домене:
+RU/EN, 16 case routes, галереи/увеличение/Escape/фокус, mailto и реальное чтение
+скопированного email, все 15 внешних действий (7 Live + 8 GitHub) в новых вкладках,
+изображения, robots/sitemap/OG, 404 и mobile390. Новая браузерная сессия — без
+авторизационных cookies, заголовков обхода или входа. У OpsWeave дополнительно
+ожидается клиентская отрисовка после DOMContentLoaded; ранняя проверка пустого
+body была ошибкой времени проверки, а не отказом приложения.
+
+CI `36372352995`: lint/MDX/build прошли, browser step завершился ошибкой.
+Чтение полного лога через доступный GitHub API возвращает403; добавлена аннотация
+с последними строками ошибки, без изменения прав аккаунта. Итог CI уточняется.
 
 ---
 
