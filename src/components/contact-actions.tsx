@@ -33,14 +33,15 @@ export function ContactActions({ email, telegram, github, locale }: {
         </a>
         <button className="contact-action" type="button" onClick={copyEmail}>
           {copyState === "copied" ? <Check aria-hidden="true" /> : copyState === "error" ? <CircleAlert aria-hidden="true" /> : <Copy aria-hidden="true" />}
-          {copyState === "copied" ? t("Email скопирован", "Email copied") : copyState === "error" ? t("Не удалось скопировать", "Could not copy") : t("Скопировать email", "Copy email")}
+          {copyState === "copied" ? t("Почта скопирована", "Email copied") : copyState === "error" ? t("Повторить копирование", "Retry copying") : t("Скопировать почту", "Copy email")}
         </button>
         <a className="contact-action" href={telegram} target="_blank" rel="noreferrer"><Send aria-hidden="true" />Telegram<ArrowIcon /></a>
         <a className="contact-action" href={github} target="_blank" rel="noreferrer"><Github aria-hidden="true" />GitHub<ArrowIcon /></a>
       </div>
       <p className="contact-panel__feedback" aria-live="polite">
-        {copyState === "copied" ? t("Адрес сохранён в буфере обмена.", "The address is in your clipboard.") : copyState === "error" ? t("Выберите адрес в кнопке письма и скопируйте его вручную.", "Use the email link and copy the address manually.") : ""}
+        {copyState === "copied" ? t("Адрес сохранён в буфере обмена.", "The address is in your clipboard.") : copyState === "error" ? t("Буфер обмена недоступен. Выделите и скопируйте адрес ниже.", "Clipboard unavailable. Select and copy the address below.") : ""}
       </p>
+      {copyState === "error" ? <input className="contact-email-fallback" aria-label={t("Адрес почты для копирования", "Email address to copy")} readOnly value={email} onFocus={event => event.currentTarget.select()} /> : null}
     </>
   );
 }

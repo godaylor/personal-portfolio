@@ -1,5 +1,8 @@
 # Публикация на Vercel
 
+Актуальные content/release evidence V3: [UX_CONTENT_PASS.md](UX_CONTENT_PASS.md).
+Ниже сохранена конфигурация существующего Vercel-проекта.
+
 ## Настройки
 
 - Framework preset: Next.js; root directory: корень этого репозитория.

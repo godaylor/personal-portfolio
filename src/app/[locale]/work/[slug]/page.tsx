@@ -27,9 +27,10 @@ export default async function ProjectPage({ params }: Props) {
           <p className="case-study__status">{project.status}</p>
           <h1 id="project-title" translate="no">{project.title}</h1>
           <p className="case-study__summary">{project.summary}</p>
+          <p className="case-study__summary"><strong>{t("Что попробовать", "What to try")}: </strong>{project.tryIt}</p>
+          <p className="case-study__availability">{project.access}</p>
           <div className="case-study__actions">
-            {project.links.map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label === "Live" ? t("Открыть Live", "Open Live") : link.label}<ArrowUpRight aria-hidden="true" /></a>)}
-            {project.links.length === 0 ? <p className="case-study__availability">{t("Локальный release проверен; публичные GitHub и Live URL пока отсутствуют.", "The local release is verified; public GitHub and Live URLs are not available yet.")}</p> : null}
+            {project.links.map(link => <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label === "Live" ? t("Попробовать", "Try it") : t("Код", "Code")}<ArrowUpRight aria-hidden="true" /></a>)}
           </div>
         </div>
         <ProjectMedia locale={locale} project={project} priority />
@@ -38,11 +39,14 @@ export default async function ProjectPage({ params }: Props) {
         <p className="case-study__body-label">{t("О проекте", "Project notes")}</p>
         <div className="case-study__details">
           <div className="case-study__section"><h2 id="case-notes-title">{t("Продукт", "Product")}</h2><p className="case-study__summary">{project.description}</p></div>
+          <div className="case-study__section"><h2>{t("Что сделать в приложении", "Things to try")}</h2><ol>{project.steps.map(step => <li key={step}>{step}</li>)}</ol></div>
           <div className="case-study__section"><h2>{t("Мой вклад", "My contribution")}</h2><p className="case-study__summary">{project.contribution}</p></div>
-          <div className="case-study__section"><h2>{t("Инженерные результаты", "Engineering outcomes")}</h2><ul>{project.results.map(item => <li key={item}>{item}</li>)}</ul></div>
-          <div className="case-study__section"><h2>{t("Технологии", "Stack")}</h2><ul translate="no">{project.stack.map(item => <li key={item}>{item}</li>)}</ul></div>
-          <div className="case-study__section"><h2>{t("Архитектура", "Architecture")}</h2><ul>{project.architectureHighlights.map(item => <li key={item}>{item}</li>)}</ul></div>
-          <div className="case-study__next"><p>{t("Границы", "Boundaries")}</p><strong>{project.boundaries}</strong></div>
+          <section aria-label={t("Технические подробности", "Technical details")} className="case-study__technical">
+          <div className="case-study__section"><h2>{t("Как это сделано", "How it works")}</h2><ul>{project.results.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div className="case-study__section"><h2>{t("Стек", "Stack")}</h2><ul className="case-study__stack" translate="no">{project.stack.slice(0, 4).map(item => <li key={item}>{item}</li>)}</ul></div>
+          <a className="case-study__back" href={project.documentationUrl} target="_blank" rel="noreferrer">{t("Техническая документация", "Technical documentation")}<ArrowUpRight aria-hidden="true" /></a>
+          </section>
+          <p className="case-study__availability">{project.boundaries}</p>
           <Link className="case-study__back" href={localizedPath(locale, "/#contact")}>{t("Обсудить проект", "Discuss this project")}<ArrowUpRight aria-hidden="true" /></Link>
         </div>
       </section>

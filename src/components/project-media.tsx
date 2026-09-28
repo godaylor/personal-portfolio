@@ -18,33 +18,19 @@ function ProjectPlaceholder({ project, locale }: ProjectMediaProps) {
       className="project-placeholder"
       data-visual={project.visual}
       role="img"
-      aria-label={`${project.title}: ${translate(locale, "скриншот пока не добавлен", "screenshot not added yet")}`}
+      aria-label={`${project.title}: ${translate(locale, "скриншот не загрузился", "screenshot unavailable")}`}
     >
       <div className="project-placeholder__toolbar" aria-hidden="true">
         <span />
         <span />
         <span />
-        <b>{translate(locale, "Скриншот скоро", "Screenshot pending")}</b>
+        <b>{translate(locale, "Скриншот не загрузился", "Screenshot unavailable")}</b>
       </div>
       <div className="project-placeholder__surface" aria-hidden="true">
-        <div className="project-placeholder__rail">
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
         <div className="project-placeholder__content">
           <span className="project-placeholder__label">{translate(locale, "ПРОЕКТ", "PROJECT")}</span>
           <strong>{project.title}</strong>
-          <div className="project-placeholder__lines">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="project-placeholder__panels">
-            <span />
-            <span />
-          </div>
+          <p>{translate(locale, "Описание и ссылки остаются доступны ниже.", "The description and links are still available below.")}</p>
         </div>
       </div>
     </div>

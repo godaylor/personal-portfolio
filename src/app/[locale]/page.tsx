@@ -1,6 +1,5 @@
 import { localizedPath, translate, type Locale } from "@/lib/i18n";
 import BlurFade from "@/components/magicui/blur-fade";
-import { ProductSystemMap } from "@/components/product-system-map";
 import ProjectsSection from "@/components/section/projects-section";
 import SkillsSection from "@/components/section/skills-section";
 import ContactSection from "@/components/section/contact-section";
@@ -38,32 +37,17 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero__copy">
           <BlurFade delay={0.04}>
-            <p className="hero__identity">
-              <span>{DATA.name}</span>
-              <span aria-hidden="true">/</span>
-              <span>{DATA.role}</span>
-            </p>
+            <p className="hero__identity">{t("Портфолио разработчика", "Developer portfolio")}</p>
           </BlurFade>
 
           <BlurFade delay={0.1}>
             <h1 id="hero-title">
-              {t("Создаю веб-продукты", "I build web products")}
-              <span>{t(" от интерфейса до production.", " from interface to production.")}</span>
+              <span translate="no">Maxeem</span> — {DATA.role}
             </h1>
           </BlurFade>
 
           <BlurFade delay={0.16}>
             <p className="hero__positioning">{DATA.positioning}</p>
-          </BlurFade>
-
-          <BlurFade delay={0.22}>
-            <ul className="hero__proof" aria-label={t("Коротко о портфолио", "Portfolio at a glance")}>
-              {DATA.proofPoints.map((point) => <li key={point}>{point}</li>)}
-            </ul>
-            <div className="hero__stack" aria-label={t("Основной стек", "Primary stack")}>
-              <span translate="no">{DATA.stackLine}</span>
-              <span>{t("От сценария до интерфейса", "From journey to interface")}</span>
-            </div>
           </BlurFade>
 
           <BlurFade delay={0.28}>
@@ -105,28 +89,16 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
           </BlurFade>
         </div>
 
-        <BlurFade className="hero__system" delay={0.18}>
-          <ProductSystemMap locale={locale} />
-        </BlurFade>
       </section>
 
       <section id="about" className="portfolio-section" aria-labelledby="about-title">
         <BlurFade inView>
           <SectionHeading
-            eyebrow={t("Обо мне", "About")}
-            title={t("Интерфейсы в контексте продукта.", "Interfaces in a product context.")}
+            eyebrow={t("Знакомство", "Introduction")}
+            title={t("Обо мне", "About me")}
             titleId="about-title"
-            description={t("Меня зовут Максим Жупаров. Я Frontend / Full-stack разработчик: работаю с интерфейсами, API, данными и проверкой production-сценариев.", "I’m Maksim Zhuparov, a Frontend / Full-stack developer working across interfaces, APIs, data and production verification.")}
+            description={DATA.about}
           />
-          <div className="about-grid">
-            {DATA.about.map((item) => (
-              <article className="about-card" key={item.title}>
-                <span aria-hidden="true" />
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
-          </div>
         </BlurFade>
       </section>
 

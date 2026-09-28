@@ -18,7 +18,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
           {data.navbar.map(item => <Link href={localizedPath(locale, "/" + item.href)} key={item.href}>{item.label}</Link>)}
         </nav>
         <nav className="site-nav site-nav--mobile" aria-label={t("Мобильная навигация", "Mobile navigation")}>
-          {data.navbar.filter(item => item.href !== "#about").map(item => <Link href={localizedPath(locale, "/" + item.href)} key={item.href}>{item.label}</Link>)}
+          {data.navbar.map(item => <Link href={localizedPath(locale, "/" + item.href)} key={item.href}>{item.label}</Link>)}
         </nav>
         <div className="site-controls">
           <LanguageSwitch locale={locale} />

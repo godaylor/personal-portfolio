@@ -21,15 +21,7 @@ function LinkIcon({ label }: { label: PortfolioProject["links"][number]["label"]
 export function ProjectCard({ project, locale, priority = false }: ProjectCardProps) {
   return (
     <article className="project-card group">
-      <Link
-        href={localizedPath(locale, `/work/${project.slug}`)}
-        className="project-card__media-link"
-        aria-label={`${translate(locale, "О проекте", "Read about")} ${project.title}`}
-      >
-        <ProjectMedia locale={locale} project={project} priority={priority} />
-      </Link>
-
-      <div className="project-card__body">
+      <div className="project-card__intro">
         <div className="project-card__meta">
           <span>{project.status}</span>
           <ArrowUpRight aria-hidden="true" />
@@ -40,22 +32,22 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
             <Link href={localizedPath(locale, `/work/${project.slug}`)}>{project.title}</Link>
           </h3>
           <p>{project.summary}</p>
-          <ul className="project-card__results">
-            {project.results.slice(0, 2).map(result => <li key={result}>{result}</li>)}
-          </ul>
+        </div>
+      </div>
+      <Link
+        href={localizedPath(locale, `/work/${project.slug}`)}
+        className="project-card__media-link"
+        aria-label={`${translate(locale, "О проекте", "Read about")} ${project.title}`}
+      >
+        <ProjectMedia locale={locale} project={project} priority={priority} />
+      </Link>
+      <div className="project-card__body">
+        <div className="project-card__copy">
+          <p className="project-card__try"><strong>{translate(locale, "Что попробовать", "What to try")}: </strong>{project.tryIt}</p>
+          <p className="project-card__access">{project.access}</p>
         </div>
 
         <div className="project-card__footer">
-          {project.stack.length > 0 ? (
-            <ul translate="no" aria-label={`${project.title}: ${translate(locale, "технологии", "technologies")}`}>
-              {project.stack.slice(0, 4).map((technology) => (
-                <li key={technology}>{technology}</li>
-              ))}
-            </ul>
-          ) : (
-            <span className="project-card__pending">{translate(locale, "Стек уточняется", "Stack pending")}</span>
-          )}
-
           {project.links.length > 0 ? (
             <div className="project-card__links">
               {project.links.map((link) => (
@@ -64,14 +56,15 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
                   key={link.label}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`${project.title}: ${link.label}`}
+                  aria-label={`${project.title}: ${link.label === "Live" ? translate(locale, "Попробовать", "Try it") : translate(locale, "Код", "Code")}`}
                 >
                   <LinkIcon label={link.label} />
-                  <span>{link.label === "Live" ? translate(locale, "Live", "Live") : link.label}</span>
+                  <span>{link.label === "Live" ? translate(locale, "Попробовать", "Try it") : translate(locale, "Код", "Code")}</span>
                 </a>
               ))}
             </div>
           ) : null}
+          <Link className="project-card__details" href={localizedPath(locale, `/work/${project.slug}`)}>{translate(locale, "О проекте", "Project details")}<ArrowUpRight aria-hidden="true" /></Link>
         </div>
       </div>
     </article>

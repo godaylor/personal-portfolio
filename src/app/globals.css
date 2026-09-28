@@ -57,7 +57,7 @@ body::before {
 ::selection { background: var(--signal); color: white; }
 a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 :where(a, button, input, textarea, select):focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
-.site-canvas { overflow: clip; }
+.site-canvas { min-width: 0; }
 .skip-link {
   position: fixed; top: .75rem; left: .75rem; z-index: 100; transform: translateY(-180%);
   border-radius: 999px; background: var(--foreground); color: var(--background); padding: .65rem 1rem;
@@ -196,7 +196,7 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 .project-placeholder__lines span:nth-child(3) { width: 52%; }
 .project-placeholder__panels { display: grid; grid-template-columns: 1.25fr .75fr; gap: .55rem; margin-top: 1.1rem; }
 .project-placeholder__panels span { height: clamp(2rem, 5vw, 3.5rem); border: 1px solid var(--border); border-radius: .55rem; background: linear-gradient(135deg, color-mix(in oklab, var(--visual-accent) 12%, transparent), transparent), var(--muted); }
-.project-card__body { min-height: 24rem; display: flex; flex: 1; flex-direction: column; padding: clamp(1.4rem, 3vw, 2rem); }
+.project-card__body { min-height: 21rem; display: flex; flex: 1; flex-direction: column; padding: clamp(1.4rem, 3vw, 2rem); }
 .project-card__meta { display: flex; align-items: center; justify-content: space-between; color: var(--muted-foreground); font: 600 .62rem/1 var(--font-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
 .project-card__meta svg { width: 1rem; height: 1rem; transition: transform 180ms ease; }
 .project-card:hover .project-card__meta svg { transform: translate(2px, -2px); }
@@ -365,7 +365,7 @@ a, button { touch-action: manipulation; -webkit-tap-highlight-color: transparent
 .language-switch { display: inline-flex; align-items: center; min-height: 44px; padding-inline: .45rem; font: 600 .75rem/1 var(--font-mono), monospace; white-space: nowrap; }
 .language-switch span { color: var(--muted-foreground); margin-right: .25rem; }
 .project-row__summary { display: block; max-width: 38rem; margin-top: .45rem; font-size: .8rem; color: var(--muted-foreground); line-height: 1.5; }
-.hero h1, .case-study__hero h1 { overflow-wrap: anywhere; }
+.hero h1, .case-study__hero h1 { overflow-wrap: normal; word-break: normal; hyphens: none; }
 html[lang="ru"] .hero h1 { max-width: 100%; }
 @media (max-width: 760px) {
   html[lang="ru"] .hero h1 { font-size: clamp(2.3rem, 11vw, 4.5rem); letter-spacing: -.045em; line-height: 1; }
@@ -388,3 +388,49 @@ html[lang="ru"] .hero h1 { max-width: 100%; }
   .hero__actions { grid-template-columns: 1fr; }
   .contact-panel { padding-inline: 1.25rem; }
 }
+
+/* Short product copy; technology details live on the project page. */
+.project-card__copy .project-card__try { margin-top: 1rem; color: var(--foreground); }
+.project-card__copy .project-card__access { margin-top: .65rem; font-size: .78rem; }
+.project-card__footer { flex-wrap: wrap; align-items: center; }
+.project-card__links { flex-wrap: wrap; }
+.project-card__links a, .project-card__details { font-size: .8rem; }
+.project-card__details { display: inline-flex; align-items: center; gap: .3rem; min-height: 2.75rem; }
+.project-card__details svg { width: .85rem; height: .85rem; }
+.case-study__technical { display: grid; gap: 2rem; }
+
+.case-study__hero .case-study__availability { margin-top: 1rem; font-size: .85rem; }
+@media (min-width: 821px) { .about-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* V3: readable introduction at every width, without clipping or word splitting. */
+.hero { min-height: auto; display: block; padding-block: clamp(3rem, 6vw, 5.5rem); }
+.hero__copy { max-width: 54rem; }
+.hero h1, html[lang="ru"] .hero h1 { max-width: 22ch; font-size: clamp(1.75rem, 1rem + 3vw, 3.5rem); line-height: 1.15; letter-spacing: -.04em; text-wrap: balance; }
+.hero h1 span { display: inline; }
+.hero__positioning { max-width: 38rem; margin-top: 1.5rem; }
+.hero__actions { display: flex; margin-top: 1.5rem; }
+.portfolio-section { padding-block: clamp(3rem, 6vw, 5rem); scroll-margin-top: 1.25rem; }
+#about .section-heading { margin-bottom: 0; }
+.project-card__body { min-height: 0; }
+.project-card__copy { flex: 1; }
+.contact-email-fallback { width: min(100%, 24rem); padding: .75rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--card); color: var(--foreground); user-select: text; }
+.case-study__section, .case-study__summary { max-width: 46rem; }
+.case-study__stack { display: flex; flex-wrap: wrap; gap: .5rem 1rem; list-style: none; padding: 0 !important; }
+.project-notes { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem; max-width: 48rem; }
+.project-notes p { margin-top: .8rem; line-height: 1.65; color: var(--muted-foreground); }
+.project-notes > h3 { margin-bottom: 1.5rem; font-size: 1.5rem; }
+.project-notes > p a { text-decoration: underline; text-underline-offset: .2em; }
+.case-study__section ol { padding-left: 1.25rem; margin-top: 1rem; list-style: decimal; color: var(--muted-foreground); line-height: 1.7; }
+.case-study__section ol li + li { margin-top: .5rem; }
+.case-study__hero > *, .case-study__body > * { min-width: 0; }
+.case-study__hero h1 { font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); line-height: 1.08; letter-spacing: -.05em; }
+.case-study__section .case-study__stack { display: flex; }
+.project-card__intro { padding: clamp(1.4rem, 3vw, 2rem); }
+.project-card__body > .project-card__copy { margin-top: 0; }
+.project-card__media-link { border-radius: 0; }
+.skill-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 520px) { .skill-groups { grid-template-columns: 1fr; } }
+.project-placeholder__surface { display: block; }
+.project-placeholder__content strong { max-width: none; overflow-wrap: normal; font-size: clamp(1.5rem, 3vw, 2rem); }
+.project-placeholder__content p { margin-top: .75rem; font-size: .85rem; line-height: 1.6; }
+@media (max-width: 380px) { .hero__actions { display: grid; grid-template-columns: 1fr; } }

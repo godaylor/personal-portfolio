@@ -1,5 +1,9 @@
 # Portfolio handoff
 
+Latest revision: [V3, 28 September 2026](docs/UX_CONTENT_PASS.md). Public identity
+is **Maxeem**, email `maxeemit@mail.ru`; VariantLab is separately in development.
+The earlier release snapshot below is retained for historical context.
+
 ## Product
 
 - **Final name:** Maksim Zhuparov — Frontend / Full-stack Portfolio

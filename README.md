@@ -1,4 +1,4 @@
-# Максим Жупаров — Frontend / Full-stack портфолио
+# Maxeem — Frontend / Full-stack портфолио
 
 Самостоятельный двуязычный сайт-портфолио на Next.js, React и TypeScript. Он
 показывает проверенные приложения через продуктовый сценарий, личный вклад,
@@ -12,10 +12,10 @@
 ## Содержание
 
 - Персональные тексты и подтверждённые email, Telegram, GitHub.
-- 7 case studies: RelayOps, Signal Studio, OpsWeave, Napoli, Solecraft, Folio
-  и ReplayLab. 6 приложений доступны публично; ReplayLab имеет локальный release.
+- 7 основных кейсов: RelayOps, Signal Studio, OpsWeave, Napoli, Solecraft, Folio
+  и ReplayLab; VariantLab отдельно в разработке, LifeOS Social — текстовый статус.
 - Внутренние страницы `/work/[slug]` и `/en/work/[slug]`: продукт, личный вклад,
-  2–4 инженерных результата, стек, архитектура и ограничения.
+  2–4 пробных действия, два подтверждённых решения и ссылка на документацию.
 - Реальные screenshots из актуальных release evidence каждого проекта.
 - Адаптивный интерфейс, светлая/тёмная темы, focus и reduced motion.
 - Рабочие email, Telegram и GitHub actions; email можно скопировать с доступным
@@ -27,10 +27,10 @@
 Данные владельца: `src/data/resume.tsx`; проекты: `src/data/projects.ts`.
 Неподтверждённые опыт, образование, фотография и резюме не отображаются.
 
-RelayOps, OpsWeave, Napoli, Solecraft и Folio представлены как проверенные
-production-приложения. Signal Studio имеет публичный production sign-in без
-self-registration. ReplayLab честно отмечен как локальный release без GitHub/Live.
-Проект 03 не входит в публичные данные и маршруты до отдельного разрешения владельца.
+Signal Studio ведёт на публичное демо с вымышленными данными. У ReplayLab есть
+публичный код, но 28 сентября его Render URL отвечал 503; кнопка пробы не показана.
+VariantLab включён по заданию V3: локальный редактор отделён от незавершённой
+облачной обработки. Personal Portfolio обозначает этот сайт, а не отдельный кейс.
 
 ## Архитектура
 
@@ -74,10 +74,13 @@ pnpm verify:browser
 
 `verify:browser` использует собственную зависимость `@playwright/test` и
 установленный Chrome. Скрипт проверяет обе локали, страницы проектов, контакты,
-переключение темы/языка, 404 и ширины 320/390/820/1440. Для запуска нужен
+переключение темы/языка, историю, clipboard fallback, 404 и 22 ширины 320–7680 CSS px. Для запуска нужен
 Chrome; другой канал можно передать через `PORTFOLIO_PLAYWRIGHT_CHANNEL`.
 Для занятого порта запустите Next.js на свободном порту и передайте точный origin
 через `PORTFOLIO_BASE_URL` — тест не завершает чужие процессы.
+`PORTFOLIO_BROWSER=firefox` или `webkit` переключает движок после установки
+`pnpm exec playwright install firefox webkit`. Это браузерная эмуляция, не тест
+реального iPhone или телевизора.
 
 ## Публикация
 
