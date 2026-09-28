@@ -12,6 +12,7 @@ try {
     await page.goto(base + path, { waitUntil: 'domcontentloaded' });
     // Allow a provider's normal browser check to finish; no bypass headers/cookies.
     await page.locator('main#main-content h1').waitFor({ timeout: 60000 });
+    await page.waitForLoadState('networkidle');
     assert.ok(page.url().startsWith(base));
     assert.match(await page.title(), /Maxeem/);
     assert.doesNotMatch(await page.locator('body').innerText(), /Максим|Жупаров|Maksim|Zhuparov/);

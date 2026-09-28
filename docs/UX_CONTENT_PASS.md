@@ -75,7 +75,29 @@ ReplayLab screenshot показывает редактор из release evidence
 
 ## Публикация V3
 
-Ожидает финального deploy и анонимной проверки; результат будет записан здесь.
+Публикация подтверждена: https://personal-portfolio-maxeem.vercel.app.
+
+- Код приложения: `25ee03124780b9ddf9af0274bfad861f09ef559a`, обычный push в `main`.
+- CLI production: `dpl_J1Ge8YziYRj9t7dQsNiy6AoJSr8e`, READY. После push существующая
+  Git-интеграция выпустила `dpl_HiQs8q1trJgodEzDBcR2cRYVqJUL`, READY; Vercel API
+  подтвердил тот же `gitSource.sha = 25ee031…` и stable alias на этом deployment.
+- [GitHub CI](https://github.com/godaylor/personal-portfolio/actions/runs/36365087205):
+  success — install, lint, MDX, build, browser smoke.
+- `scripts/verify-production.mjs`: fresh context без Vercel cookies/headers,
+  RU/EN home, Signal Studio, ReplayLab и EN VariantLab, mailto/copy, реальные
+  изображения, robots/sitemap/OG, mobile 390px и 404 — PASS.
+- В первом smoke click был выполнен до полной загрузки client scripts; отдельная
+  диагностика подтвердила успешное копирование. В smoke добавлено ожидание
+  `networkidle` после SSR; повторный полный проход успешен.
+- `ssoProtection.deploymentType = preview` подтверждён чтением API. Настройки
+  защиты, тариф, домены и ресурсы не менялись.
+
+Остались только ограничения соседних приложений и ручных устройств: ReplayLab
+отвечал 503; cloud-processing VariantLab и работа после входа не подтверждены;
+реальные iPhone/TV и screen reader не тестировались. В Portfolio эти состояния
+не скрыты. От владельца для завершения публикации действий не требуется.
+Исторические локальные screenshots, существовавшие до V3, сохранены в рабочей
+копии без включения в новый коммит. Четыре снимка V3 зафиксированы отдельно.
 
 ## Историческая запись — 2026-09-23 (не текущее состояние)
 
