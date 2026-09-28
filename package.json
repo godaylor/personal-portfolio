@@ -8,7 +8,7 @@
   "packageManager": "pnpm@10.15.1",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1 --port 32800",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start --hostname 127.0.0.1 --port 32800",
     "lint": "eslint",
     "lint:fix": "eslint --fix",

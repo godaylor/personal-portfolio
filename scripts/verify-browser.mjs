@@ -28,6 +28,9 @@ await mkdir('docs/screenshots', { recursive: true });
 
 async function assertLayout(page, label) {
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  // Let Chromium paint the new scroll extent after an extreme viewport change.
+  // See the matching 7680→320 guard in verify-presentations.mjs.
+  await page.waitForTimeout(100);
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow: ${label}`);
   const clipped = await page.locator('h1, h2, .site-header__inner, .contact-action, .project-card, .case-study__actions').evaluateAll(nodes => nodes.filter(node => {
     const r = node.getBoundingClientRect();
