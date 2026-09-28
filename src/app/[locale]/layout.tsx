@@ -5,11 +5,11 @@ import { pageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "../globals.css";
 
-const geist = Geist({ subsets: ["latin", "cyrillic"], variable: "--font-sans", weight: ["400", "500", "600", "700"] });
-const geistMono = Geist_Mono({ subsets: ["latin", "cyrillic"], variable: "--font-mono", weight: ["400", "500", "600"] });
+const geist = localFont({ src: "../../assets/fonts/Geist.ttf", variable: "--font-sans", weight: "100 900", display: "swap" });
+const geistMono = localFont({ src: "../../assets/fonts/GeistMono.ttf", variable: "--font-mono", weight: "100 900", display: "swap" });
 
 export function generateStaticParams() { return locales.map(locale => ({ locale })); }
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {

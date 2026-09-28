@@ -99,6 +99,12 @@ CLI установленного Next.js). Шрифты, зависимости,
 общие проверки Firefox/WebKit завершились успешно.
 Результат проверок этой поправки фиксируется в заключительном сообщении.
 
+Vercel-сборка `f7befc3` выявила ещё одну ошибку `next/font/google`: загрузчик
+ожидал расширение файла в конце Google URL и получил null. При этом GitHub build
+того же commit прошёл. Geist и Geist Mono подключены через `next/font/local`:
+неизменённые variable TTF из официального google/fonts, с полной OFL-лицензией
+и источниками в `src/assets/fonts`. Сборка больше не запрашивает Google Fonts.
+
 Три итоговых снимка сняты в браузере и визуально просмотрены; тот же интерфейс
 отдельно проверен на публичном production без авторизации:
 [desktop](screenshots/portfolio-presentation-desktop.png),

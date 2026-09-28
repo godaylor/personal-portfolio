@@ -43,7 +43,8 @@ VariantLab включён по заданию V3: локальный редак�
 
 - App Router генерирует русские и английские страницы на сервере.
 - Production собирается штатным `next build --webpack`: это обходит обнаруженный
-  в CI сбой Turbopack при разрешении `next/font/google`, не меняя сами шрифты.
+  в CI сбой Turbopack. Geist / Geist Mono хранятся в `src/assets/fonts` с OFL
+  и подключаются через `next/font/local`, без сетевых запросов при сборке.
 - Типизированный слой `src/data` отделяет подтверждённые факты от UI.
 - `NEXT_PUBLIC_SITE_URL` управляет canonical URLs и индексацией; preview и
   локальная сборка получают `noindex`.
