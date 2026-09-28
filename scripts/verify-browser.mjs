@@ -99,7 +99,7 @@ try {
         assert.ok(await page.locator('.project-gallery__main img').count());
         const count = await page.locator('.case-study__section ol li').count();
         assert.ok(count >= 2 && count <= 4);
-        assert.equal(await page.locator('.case-study__technical .case-study__section').first().locator('li').count(), 2);
+        assert.equal(await page.locator('.case-study__technical .case-study__section').first().locator('li').count(), path === '/work/variantlab' ? 4 : 2);
         assert.equal(await page.locator('.case-study__next').count(), 0);
       }
       for (const width of [320, 1440]) {
