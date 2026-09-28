@@ -324,8 +324,8 @@ const entries = [
   },
   {
     slug: "variantlab", title: "VariantLab", featured: false, visual: "violet",
-    status: ["В разработке · локальный редактор", "In development · local editor"],
-    stack: ["React", "TypeScript", "Next.js", "Rust / WASM"],
+    status: ["Можно попробовать · облачный рендер", "Try it online · cloud rendering"],
+    stack: ["React", "TypeScript", "Next.js", "Rust / WASM", "FFmpeg", "D1 / R2"],
     links: [
       { label: "Live", href: "https://variantlab-creative-ops-demo.maxeemzhuparov.chatgpt.site/variantlab/" },
       { label: "GitHub", href: "https://github.com/godaylor/variantlab" },
@@ -333,21 +333,21 @@ const entries = [
     cover: ["/projects/variantlab.png", "VariantLab: локальный редактор рекламных версий", "VariantLab local advertising video editor"],
     ru: {
       summary: "Редактор для авторов рекламы: несколько версий ролика с разными форматами и текстами из одного монтажа.",
-      tryIt: "Создайте кампанию, откройте редактор и добавьте формат ролика.",
-      access: "Локальный редактор без регистрации. Изменения хранятся в браузере; облачная обработка ещё не готова.",
-      description: "Кампания объединяет исходный ролик и его рекламные версии. Локальный экспорт создаёт видео на устройстве; его доступность зависит от браузера и исходного файла.",
-      contribution: "Разработал кампании и варианты, локальное сохранение, предварительную проверку и экспорт поверх редактора на основе OpenCut.",
+      tryIt: "Создайте версии ролика и скачайте результат локального или облачного экспорта.",
+      access: "Локальное редактирование и экспорт — без регистрации. Для облачного сохранения и рендера нужен вход через ChatGPT.",
+      description: "Кампания объединяет исходный ролик и рекламные версии. Экспорт работает на устройстве или в облаке: фоновый FFmpeg-рендер создаёт WebM для скачивания. Облачный экспорт и воспроизведение проверены в форматах 9:16, 16:9 и 1:1.",
+      contribution: "Разработал кампании и варианты, локальное и облачное сохранение, предварительную проверку, экспорт и скачивание поверх редактора на основе OpenCut; подключил фоновый FFmpeg-рендер и приватное хранение медиа.",
       results: [], architecture: [],
-      boundaries: "Вход нужен для облачного сохранения. Работа облачной обработки и продолжение на другом устройстве здесь не подтверждены.",
+      boundaries: "Медиа загружаются в облако только явно. Проверены короткие ролики; длительные нагрузки и будущая доступность бесплатных ресурсов хостинга не гарантируются. Локальный экспорт зависит от браузера и исходного файла.",
     },
     en: {
       summary: "An editor for ad creators to make several video versions with different formats and copy from one edit.",
-      tryIt: "Create a campaign, open the editor and add a video format.",
-      access: "Local editing without sign-in. Changes stay in the browser; cloud processing is not ready yet.",
-      description: "A campaign groups the source video and its advertising versions. Local export creates video on your device; availability depends on the browser and source file.",
-      contribution: "Built campaigns and variants, local persistence, preflight checks and export on an editor based on OpenCut.",
+      tryIt: "Create video variants and download a local or cloud export.",
+      access: "Local editing and export need no account. Cloud saving and rendering require ChatGPT sign-in.",
+      description: "A campaign groups the source video and its advertising variants. Export runs on your device or in the cloud: background FFmpeg rendering produces downloadable WebM files. Cloud export and playback were verified in 9:16, 16:9 and 1:1 formats.",
+      contribution: "Built campaigns and variants, local and cloud persistence, preflight checks, export and downloads on an editor based on OpenCut; integrated background FFmpeg rendering and private media storage.",
       results: [], architecture: [],
-      boundaries: "Sign-in is required for cloud storage. Cloud processing and continuation on another device have not been verified here.",
+      boundaries: "Media is uploaded to the cloud only explicitly. Short videos were verified; sustained workloads and future free hosting capacity are not guaranteed. Local export depends on the browser and source file.",
     },
   },
 ] as const;
@@ -382,8 +382,8 @@ const practicalDetails: Record<string, { ru: { steps: string[]; results: string[
     en: { steps: ["Create a play on a larger screen.", "Place players and add movement phases.", "Play the sequence and save a backup."], results: ["Local persistence allows work without a connection.", "Collaborative text conflicts are resolved explicitly; local undo preserves other people's changes."] },
   },
   variantlab: {
-    ru: { steps: ["Создайте учебную кампанию без входа.", "Добавьте формат и откройте монтажную ленту.", "Для своего видео используйте проверку и локальный экспорт."], results: ["Кампания сохраняется на устройстве и открывается после обновления страницы.", "Версии ролика связаны с общим монтажом и отдельными настройками формата."] },
-    en: { steps: ["Create a sample campaign without signing in.", "Add a format and open the timeline.", "For your own video, use preflight checks and local export."], results: ["Campaigns are saved on the device and reopen after a page reload.", "Video versions share an edit while retaining separate format settings."] },
+    ru: { steps: ["Создайте кампанию, импортируйте своё видео и соберите монтаж.", "Выберите версии и форматы, выполните предварительную проверку.", "Экспортируйте локально или войдите через ChatGPT, сохраните кампанию и явно загрузите исходник для облачного рендера.", "Дождитесь завершения и скачайте готовые ролики."], results: ["Кампании сохраняются локально и в облаке; облачная кампания и готовый результат открываются после обновления страницы.", "Версии ролика используют общий монтаж и отдельные настройки формата.", "Фоновые задания проходят через D1 и FFmpeg-worker; исходники и готовые файлы хранятся в приватном R2.", "Облачные WebM в 9:16, 16:9 и 1:1 скачаны и воспроизведены; после merge повторно проверен полный облачный сценарий."] },
+    en: { steps: ["Create a campaign, import your video and assemble an edit.", "Choose variants and formats, then run preflight checks.", "Export locally, or sign in with ChatGPT, save the campaign and explicitly upload the source for cloud rendering.", "Wait for completion and download the finished videos."], results: ["Campaigns persist locally and in the cloud; the cloud campaign and completed result reopen after reload.", "Video variants share an edit while retaining separate format settings.", "Background jobs run through D1 and an FFmpeg worker; originals and rendered files live in private R2 storage.", "Cloud WebM files in 9:16, 16:9 and 1:1 were downloaded and played; the full cloud journey was rechecked after merge."] },
   },
 };
 
@@ -404,7 +404,9 @@ export function getProjects(locale: Locale): PortfolioProject[] {
       stack: [...entry.stack],
       results: practicalDetails[entry.slug][locale].results,
       steps: practicalDetails[entry.slug][locale].steps,
-      documentationUrl: entry.links.find(link => link.label === "GitHub")!.href + "#readme",
+      documentationUrl: entry.slug === "variantlab"
+        ? "https://github.com/godaylor/variantlab/pull/3"
+        : entry.links.find(link => link.label === "GitHub")!.href + "#readme",
       boundaries: copy.boundaries,
       links: entry.links.map(link => ({ ...link })),
       cover: { src: entry.cover[0], alt: locale === "ru" ? entry.cover[1] : entry.cover[2] },

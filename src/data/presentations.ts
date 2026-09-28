@@ -46,9 +46,9 @@ const presentations: Record<string, Presentation> = {
   },
   variantlab: {
     audience: ["Для автора рекламы, который готовит версии одного ролика под разные форматы.", "For an ad creator preparing different formats of one video."],
-    features: [["Кампании с локальным сохранением в браузере.", "Campaigns saved locally in the browser."], ["Версии ролика с общим монтажом и отдельным форматом.", "Video variants sharing an edit with individual formats."], ["Заголовок и призыв к действию для версии.", "Variant-specific headline and call to action."], ["Предварительная проверка перед локальным экспортом.", "Preflight checks before local export."]],
+    features: [["Локальное сохранение и облачные кампании после входа через ChatGPT.", "Local persistence and cloud campaigns after ChatGPT sign-in."], ["Версии ролика с общим монтажом, отдельным форматом и текстом.", "Video variants sharing an edit with individual formats and copy."], ["Предварительная проверка и локальный экспорт без регистрации.", "Preflight checks and local export without an account."], ["Облачный FFmpeg-рендер и скачивание готовых WebM.", "Cloud FFmpeg rendering and downloadable WebM files."]],
     screens: [screen("variantlab-editor", "Новая локальная кампания: монтажная лента до загрузки исходного видео.", "New local campaign: timeline before importing source video."), screen("variantlab-variants", "Выбор форматов рекламных версий в учебной кампании.", "Selecting video variant formats in a sample campaign."), screen("variantlab-export", "Параметры локального экспорта. Рендер не запускался.", "Local export settings. Rendering was not started.")],
-    note: ["Снимки локального редактора без загруженного видео. Они не подтверждают облачную обработку или успешный экспорт ролика.", "Local editor screenshots without uploaded video. They do not verify cloud processing or a successful video export."],
+    note: ["На снимках — локальный редактор до загрузки видео. Облачный рендер, скачивание и воспроизведение отдельно подтверждены проверками PR #3 и повторным сценарием после его слияния.", "These screenshots show the local editor before video import. Cloud rendering, download and playback were separately verified in PR #3 and rechecked after merge."],
   },
 };
 
