@@ -13,7 +13,8 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "verify:mdx": "node scripts/verify-mdx.mjs",
-    "verify:browser": "node scripts/verify-browser.mjs"
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "verify:presentations": "node scripts/verify-presentations.mjs"
   },
   "dependencies": {
     "@content-collections/mdx": "^0.2.2",

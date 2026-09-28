@@ -64,7 +64,7 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
               ))}
             </div>
           ) : null}
-          <Link className="project-card__details" href={localizedPath(locale, `/work/${project.slug}`)}>{translate(locale, "О проекте", "Project details")}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link className="project-card__details" href={localizedPath(locale, `/work/${project.slug}`)}>{translate(locale, "Подробнее", "Project details")}<ArrowUpRight aria-hidden="true" /></Link>
         </div>
       </div>
     </article>

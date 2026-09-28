@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   titleId?: string;
   description?: string;
@@ -17,7 +17,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={cn("section-heading", className)}>
-      <p className="section-eyebrow">{eyebrow}</p>
+      {eyebrow ? <p className="section-eyebrow">{eyebrow}</p> : null}
       <div className="section-heading__copy">
         <h2 id={titleId}>{title}</h2>
         {description ? <p>{description}</p> : null}

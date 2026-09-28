@@ -9,9 +9,8 @@ export default function ContactSection({ locale }: { locale: Locale }) {
     <div className="contact-panel">
       <div className="contact-panel__signal" aria-hidden="true"><span /><span /><span /></div>
       <div className="contact-panel__copy">
-        <p className="section-eyebrow">{t("Контакты", "Contact")}</p>
-        <h2 id="contact-title">{t("Открыт к Frontend / Full-stack роли.", "Open to Frontend / Full-stack roles.")}</h2>
-        <p>{t("Напишите о вакансии или задайте вопрос о проектах.", "Get in touch about a role or ask a question about the projects.")}</p>
+        <h2 id="contact-title">{t("Обсудим работу или проект.", "Let’s discuss a role or a project.")}</h2>
+        <p>{t("Напишите о вакансии, проектной задаче или задайте вопрос о приложениях.", "Get in touch about a role, a project brief or a question about the applications.")}</p>
       </div>
       <ContactActions email={data.contact.email} telegram={data.contact.telegram} github={data.githubUrl} locale={locale} />
     </div>

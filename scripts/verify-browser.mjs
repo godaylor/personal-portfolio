@@ -63,6 +63,7 @@ try {
       const response = await page.goto(base + prefix + (path || '/'));
       assert.equal(response.status(), 200, prefix + path);
       await page.locator('h1').waitFor();
+      await page.waitForLoadState('networkidle');
       assert.equal(await page.locator('html').getAttribute('lang'), prefix ? 'en' : 'ru');
       assert.equal(await page.locator('main#main-content').count(), 1);
       assert.equal(await page.locator('h1').count(), 1);
@@ -91,6 +92,8 @@ try {
         assert.equal(person.telephone, undefined);
         assert.equal(await page.locator('a[href="mailto:maxeemit@mail.ru"]').count(), 1);
       } else if (path.startsWith('/work/')) {
+        assert.equal(await page.locator('.project-gallery').count(), 1);
+        assert.ok(await page.locator('.project-gallery__main img').count());
         const count = await page.locator('.case-study__section ol li').count();
         assert.ok(count >= 2 && count <= 4);
         assert.equal(await page.locator('.case-study__technical .case-study__section').first().locator('li').count(), 2);
@@ -156,6 +159,7 @@ try {
   await page.waitForURL(base + '/en/work/solecraft');
   await page.getByRole('link', { name: 'Back to selected work' }).click();
   await page.waitForURL(/\/en\/?#selected-work$/);
+  await page.waitForLoadState('networkidle');
   await page.goto(base + '/#contact');
   await page.getByRole('button', { name: 'Скопировать почту' }).click();
   if (engine === 'chromium') {
@@ -194,6 +198,7 @@ try {
     const response = await page.goto(base + prefix + '/work/does-not-exist');
     assert.equal(response.status(), 404);
     assert.match(await page.locator('h1').innerText(), prefix ? /Page not found/ : /Страница не найдена/);
+    await page.waitForLoadState('networkidle');
   }
   for (const path of ['/robots.txt', '/sitemap.xml', '/opengraph-image', '/icon.svg']) {
     const response = await page.request.get(base + path);
@@ -206,10 +211,10 @@ try {
       await page.evaluate(theme => { localStorage.setItem('theme', theme); document.documentElement.classList.toggle('dark', theme === 'dark'); }, theme);
       await page.locator('footer').scrollIntoViewIfNeeded();
       await page.evaluate(() => scrollTo(0, 0));
-      await page.screenshot({ path: `docs/screenshots/portfolio-v3-${name}.png` });
+      await page.screenshot({ path: `docs/screenshots/portfolio-presentation-${name}.png` });
     }
     await page.goto(base + '/work/signal-studio');
-    await page.screenshot({ path: 'docs/screenshots/portfolio-v3-project.png', fullPage: true });
+    await page.screenshot({ path: 'docs/screenshots/portfolio-presentation-project.png', fullPage: true });
   }
   assert.deepEqual(errors.filter(error => !error.includes('404')), []);
   console.log(`PASS ${engine}: V3 browser verification; no unexpected runtime errors`);

@@ -8,7 +8,6 @@ export default function SkillsSection({ locale }: { locale: Locale }) {
   return (
     <div className="skills-section">
       <SectionHeading
-        eyebrow={t("Технологии", "Skills / stack")}
         title={t("Стек моих проектов.", "The tools behind my projects.")}
         titleId="stack-title"
         description={t("Технологии, которые используются в представленных приложениях.", "Technologies used in the applications presented here.")}

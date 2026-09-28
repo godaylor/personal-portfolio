@@ -434,3 +434,50 @@ html[lang="ru"] .hero h1 { max-width: 100%; }
 .project-placeholder__content strong { max-width: none; overflow-wrap: normal; font-size: clamp(1.5rem, 3vw, 2rem); }
 .project-placeholder__content p { margin-top: .75rem; font-size: .85rem; line-height: 1.6; }
 @media (max-width: 380px) { .hero__actions { display: grid; grid-template-columns: 1fr; } }
+
+/* Project presentations: existing palette/typefaces, readable editorial scale. */
+.section-heading { display: block; margin-bottom: 2rem; }
+.section-heading__copy h2, .contact-panel__copy h2 { max-width: 27ch; font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem); line-height: 1.15; letter-spacing: -.035em; }
+.section-heading__copy > p { font-size: 1.0625rem; margin-top: 1rem; }
+.portfolio-section { padding-block: clamp(2.5rem, 5vw, 4rem); }
+#about .case-study__back { margin-top: 1rem; color: var(--signal); }
+.project-card__copy p { font-size: 1rem; }
+.project-card__copy .project-card__access, .project-card__meta, .project-card__links a, .project-card__details { font-size: .875rem; line-height: 1.6; }
+.site-nav a, .site-nav--mobile a, .hero-action, .contact-action, .contact-action > span, .contact-panel__feedback { font-size: .875rem; }
+.site-brand strong, .site-brand small, .language-switch, .hero__identity, .site-footer { font-size: .875rem; line-height: 1.5; }
+.site-header__inner { flex-wrap: wrap; row-gap: .5rem; padding-block: .5rem; }
+.site-nav { flex-wrap: wrap; }
+.site-footer { gap: 1rem; flex-wrap: wrap; }
+@media (max-width: 1100px) { .site-brand small { display: none; } }
+.skill-group h3 { font-size: 1rem; min-height: auto; }
+.skill-group ul { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.skill-group li, .case-study__section .case-study__stack li { border: 1px solid var(--border); border-radius: .6rem; padding: .45rem .75rem; font-size: 1rem; color: var(--foreground); background: var(--card); }
+.contact-panel__copy > p:last-child { font-size: 1rem; }
+.case-study { padding-block: 2.5rem 4rem; }
+.case-study__hero { display: block; margin-top: 2rem; }
+.case-study__hero > :last-child { width: 100%; max-width: 52rem; }
+.case-study__summary { font-size: 1.0625rem; margin-top: 1rem; }
+.case-study__status, .case-study__back, .case-study__actions a, .case-study__availability { font-size: .875rem; line-height: 1.6; }
+.case-study__availability { max-width: 46rem; }
+.case-study__body { display: block; margin-top: 3rem; padding-top: 2.5rem; }
+.case-study__details { max-width: 52rem; margin-inline: auto; }
+.case-study__section h2 { font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem); line-height: 1.2; }
+.case-study__section ul, .case-study__section ol { font-size: 1rem; line-height: 1.7; }
+.project-gallery { margin-top: 2.5rem; min-width: 0; }
+.project-gallery__main { display: block; width: 100%; position: relative; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); cursor: zoom-in; }
+.project-gallery__main img { width: 100%; height: auto; aspect-ratio: 1440 / 1000; object-fit: contain; border-radius: inherit; }
+.project-gallery__main > span:last-child:not(.project-gallery__missing) { position: absolute; right: .75rem; bottom: .75rem; background: var(--card); color: var(--foreground); border: 1px solid var(--border); border-radius: 999px; padding: .5rem .85rem; font-size: .875rem; }
+.project-gallery figcaption, .project-gallery__note { margin-top: .8rem; font-size: .875rem; line-height: 1.6; color: var(--muted-foreground); }
+.project-gallery__thumbnails { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: 1rem; margin-top: 1.25rem; }
+.project-gallery__thumbnails button { min-width: 0; border: 2px solid var(--border); border-radius: .65rem; padding: .4rem; background: var(--card); text-align: left; cursor: pointer; }
+.project-gallery__thumbnails button[aria-pressed="true"] { border-color: var(--signal); }
+.project-gallery__thumbnails img { width: 100%; aspect-ratio: 1440 / 1000; object-fit: contain; border-radius: .3rem; }
+.project-gallery__thumbnails button > span { display: block; padding: .6rem .25rem .3rem; font-size: .875rem; line-height: 1.5; }
+.project-gallery__missing { display: grid; place-content: center; min-height: 12rem; padding: 1.5rem; color: var(--muted-foreground); }
+.project-gallery__dialog { position: fixed; inset: 0; width: min(96vw, 1600px); max-width: 96vw; max-height: 96dvh; margin: auto; padding: 0; border: 1px solid var(--border); border-radius: .75rem; background: var(--card); color: var(--foreground); overscroll-behavior: contain; }
+.project-gallery__dialog::backdrop { background: rgb(0 0 0 / 80%); }
+.project-gallery__toolbar { display: flex; align-items: center; gap: 1rem; justify-content: space-between; padding: .75rem; position: sticky; top: 0; background: var(--card); }
+.project-gallery__toolbar p { font-size: .875rem; line-height: 1.5; }
+.project-gallery__toolbar button { flex-shrink: 0; min-height: 2.75rem; border: 1px solid var(--border); border-radius: .4rem; padding: .4rem .75rem; font-size: .875rem; cursor: pointer; }
+.project-gallery__lightbox > img { width: 100%; height: auto; object-fit: contain; }
+@media (max-width: 430px) { .project-gallery__toolbar { align-items: flex-start; flex-direction: column-reverse; } }

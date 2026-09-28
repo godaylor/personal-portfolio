@@ -30,7 +30,7 @@ export function getData(locale: Locale) {
       { href: "#stack", label: t("Стек", "Stack") },
       { href: "#contact", label: t("Контакты", "Contact") },
     ],
-    about: t("Занимаюсь проектной frontend/full-stack разработкой на React и TypeScript, работаю с Node.js и PostgreSQL. Параллельно у меня есть опыт в автокредитовании. Ищу работу разработчиком; ниже — приложения и примеры моей работы.", "I develop frontend and full-stack projects with React and TypeScript, working with Node.js and PostgreSQL. Alongside development, I have experience in auto financing. I’m looking for a developer role; below are applications and examples of my work."),
+    about: t("Я — Maxeem. Разрабатываю сайты и веб-приложения на React и TypeScript. В портфолио — интернет-магазины, аналитика и инструменты для совместной работы. Для серверной части в проектах использую Node.js и PostgreSQL. Открыт к предложениям о работе и проектным задачам.", "I’m Maxeem. I build websites and web applications with React and TypeScript. My portfolio includes online stores, analytics and collaboration tools. I use Node.js and PostgreSQL for the server side of my projects. I’m open to developer roles and project work."),
     skillGroups: [
       { title: "Frontend", skills: ["React", "TypeScript", "Next.js"], note: "" },
       { title: t("Backend и данные", "Backend and data"), skills: ["Node.js", "PostgreSQL"], note: "" },

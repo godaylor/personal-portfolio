@@ -94,11 +94,11 @@ export default async function Page({ params }: { params: Promise<{ locale: Local
       <section id="about" className="portfolio-section" aria-labelledby="about-title">
         <BlurFade inView>
           <SectionHeading
-            eyebrow={t("Знакомство", "Introduction")}
             title={t("Обо мне", "About me")}
             titleId="about-title"
             description={DATA.about}
           />
+          <Link className="case-study__back" href={localizedPath(locale, "/#contact")}>{t("Обсудить задачу", "Discuss a project")}<ArrowUpRight aria-hidden="true" /></Link>
         </BlurFade>
       </section>
 

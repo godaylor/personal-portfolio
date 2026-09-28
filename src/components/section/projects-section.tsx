@@ -11,7 +11,6 @@ export default function ProjectsSection({ locale }: { locale: Locale }) {
   return (
     <div className="projects-section">
       <SectionHeading
-        eyebrow={t("Проекты", "Selected work")}
         title={t("Выберите проект и попробуйте его.", "Choose a project to try.")}
         titleId="selected-work-title"
         description={t("У каждого приложения — пример действия, снимок экрана и код. Условия доступа указаны рядом со ссылкой.", "Each application has an action to try, a screenshot and source code. Access conditions are listed next to its link.")}

@@ -8,7 +8,8 @@ try {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  for (const path of ['/', '/en', '/work/signal-studio', '/work/replaylab', '/en/work/variantlab']) {
+  const slugs = ['relayops', 'signal-studio', 'opsweave', 'napoli', 'solecraft', 'folio', 'replaylab', 'variantlab'];
+  for (const path of ['/', '/en', ...['', '/en'].flatMap(prefix => slugs.map(slug => `${prefix}/work/${slug}`))]) {
     await page.goto(base + path, { waitUntil: 'domcontentloaded' });
     // Allow a provider's normal browser check to finish; no bypass headers/cookies.
     await page.locator('main#main-content h1').waitFor({ timeout: 60000 });
@@ -30,9 +31,29 @@ try {
       await page.getByText(path === '/' ? 'Адрес сохранён в буфере обмена.' : 'The address is in your clipboard.').waitFor();
       assert.equal(await page.evaluate(() => navigator.clipboard.readText()), 'maxeemit@mail.ru');
     } else {
-      const img = page.locator('.project-media img');
+      const img = page.locator('.project-gallery__main img');
       await img.scrollIntoViewIfNeeded();
-      await page.waitForFunction(() => [...document.querySelectorAll('.project-media img')].every(img => img.complete && img.naturalWidth > 0));
+      await page.waitForFunction(() => [...document.querySelectorAll('.project-gallery__main img')].every(img => img.complete && img.naturalWidth > 0));
+      await page.locator('.project-gallery__main').click();
+      assert.equal(await page.locator('dialog[open]').count(), 1);
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('dialog[open]').count(), 0);
+      assert.ok(await page.locator('.project-gallery__main').evaluate(el => el === document.activeElement));
+      // Each external action opens separately and keeps the portfolio available.
+      if (!path.startsWith('/en')) {
+        for (const action of await page.locator('.case-study__actions a[target="_blank"]').all()) {
+          const href = await action.getAttribute('href');
+          const popupPromise = page.waitForEvent('popup');
+          await action.click();
+          const popup = await popupPromise;
+          await popup.waitForLoadState('domcontentloaded', { timeout: 60000 });
+          assert.equal(new URL(popup.url()).hostname, new URL(href).hostname);
+          assert.ok((await popup.locator('body').innerText()).length > 20);
+          console.log('PASS external action', href);
+          await popup.close();
+          assert.equal(page.url(), base + path);
+        }
+      }
     }
     console.log('PASS anonymous production', path);
     await page.waitForTimeout(1000);
@@ -49,5 +70,5 @@ try {
   await page.goto(base);
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
   assert.deepEqual(errors, []);
-  console.log('PASS published V3 identity, content, assets, contact, mobile and 404 without authentication');
+  console.log('PASS published identity, 16 cases, galleries, external actions, assets, contact, mobile and 404 without authentication');
 } finally { await browser.close(); }

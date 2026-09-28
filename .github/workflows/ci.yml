@@ -30,3 +30,4 @@ jobs:
         run: |
           pnpm start &
           pnpm verify:browser
+          PORTFOLIO_BASE_URL=http://127.0.0.1:32800 pnpm verify:presentations
