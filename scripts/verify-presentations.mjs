@@ -14,10 +14,10 @@ try {
   for (const prefix of ['', '/en']) {
     await page.goto(base + prefix + '/');
     await page.waitForLoadState('networkidle');
-    assert.equal(await page.locator('.section-heading > .section-eyebrow').count(), 0);
-    // No gallery or full gallery assets on the landing page.
+    assert.equal(await page.locator('.section-heading > .section-eyebrow').count(), 2);
+    // The hero sculpture is separate from the interactive project galleries.
     assert.equal(await page.locator('.project-gallery').count(), 0);
-    assert.equal(await page.locator('img[src*="presentation"]').count(), 0);
+    assert.equal(await page.locator('.project-reel__screen img').count(), 1);
     for (const slug of slugs) {
       const card = page.locator(`.project-card:has(a[href="${prefix}/work/${slug}"])`);
       assert.equal(await card.locator('a a').count(), 0);

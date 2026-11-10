@@ -1,0 +1,31 @@
+{
+  "source": "public",
+  "brand": "Ракурс",
+  "captures": [
+    {
+      "scene": "home",
+      "file": "public/projects/presentation/v7-rakurs-home.jpg",
+      "url": "https://signal-studio-smoky.vercel.app/demo",
+      "title": "Демо без регистрации | Ракурс"
+    },
+    {
+      "scene": "explore",
+      "file": "public/projects/presentation/v7-rakurs-explore.jpg",
+      "url": "https://signal-studio-smoky.vercel.app/studio/38f285d6-2ba5-4c9d-aa1a-b189b8d44aac/explore?aqv=1&project=38f285d6-2ba5-4c9d-aa1a-b189b8d44aac&mode=funnel&event=*&aggregation=count&start=2026-09-29T00%3A00%3A00.000Z&end=2026-11-10T00%3A00%3A00.000Z&tz=UTC&unit=day&compare=none&view=bar&match=all&fs=%5B%22event%22%2C%22signup%22%2C%5B%5D%5D&fs=%5B%22event%22%2C%22onboarding_completed%22%2C%5B%5D%5D&fs=%5B%22event%22%2C%22core_feature_used%22%2C%5B%5D%5D&fw=1440",
+      "title": "Explore | Ракурс"
+    },
+    {
+      "scene": "dynamics",
+      "file": "public/projects/presentation/v7-rakurs-dynamics.jpg",
+      "url": "https://signal-studio-smoky.vercel.app/studio/38f285d6-2ba5-4c9d-aa1a-b189b8d44aac/explore?aqv=1&project=38f285d6-2ba5-4c9d-aa1a-b189b8d44aac&mode=trend&event=*&aggregation=count&start=2026-09-29T00%3A00%3A00.000Z&end=2026-11-10T00%3A00%3A00.000Z&tz=UTC&unit=day&compare=none&view=line&match=all",
+      "title": "Explore | Ракурс"
+    },
+    {
+      "scene": "mobile",
+      "file": "public/projects/presentation/v7-rakurs-mobile.jpg",
+      "url": "https://signal-studio-smoky.vercel.app/studio/38f285d6-2ba5-4c9d-aa1a-b189b8d44aac/explore?aqv=1&project=38f285d6-2ba5-4c9d-aa1a-b189b8d44aac&mode=trend&event=*&aggregation=count&start=2026-09-29T00%3A00%3A00.000Z&end=2026-11-10T00%3A00%3A00.000Z&tz=UTC&unit=day&compare=none&view=line&match=all",
+      "title": "Explore | Ракурс"
+    }
+  ],
+  "errors": []
+}

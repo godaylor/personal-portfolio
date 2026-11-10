@@ -13,13 +13,13 @@ const browsers = { chromium, firefox, webkit };
 const browser = await browsers[engine].launch({ headless: true, ...(engine === 'chromium' ? { channel: process.env.PORTFOLIO_PLAYWRIGHT_CHANNEL || 'chrome' } : {}) });
 const slugs = ['relayops', 'signal-studio', 'opsweave', 'napoli', 'solecraft', 'folio', 'replaylab', 'variantlab'];
 const links = {
-  relayops: ['https://relayops-godaylor.onrender.com', 'https://github.com/godaylor/relayops'],
-  'signal-studio': ['https://signal-studio-smoky.vercel.app/demo', 'https://github.com/godaylor/signal-studio'],
-  opsweave: ['https://opsweave.onrender.com', 'https://github.com/godaylor/opsweave'],
+  relayops: ['https://relayops-godaylor.onrender.com', 'https://github.com/godaylor/mayak'],
+  'signal-studio': ['https://signal-studio-smoky.vercel.app/demo', 'https://github.com/godaylor/rakurs'],
+  opsweave: ['https://opsweave.onrender.com', 'https://github.com/godaylor/po-shagam'],
   napoli: ['https://napoli-pizza-tau.vercel.app', 'https://github.com/godaylor/napoli-pizza'],
   solecraft: ['https://solecraft-two.vercel.app', 'https://github.com/godaylor/solecraft'],
   folio: ['https://folio-crypto-godaylor.maxeemzhuparov.chatgpt.site', 'https://github.com/godaylor/crypto-portfolio'],
-  replaylab: ['https://github.com/godaylor/replaylab'],
+  replaylab: ['https://replaylab-godaylor.onrender.com', 'https://github.com/godaylor/replaylab'],
   variantlab: ['https://variantlab-creative-ops-demo.maxeemzhuparov.chatgpt.site/variantlab/', 'https://github.com/godaylor/variantlab'],
 };
 const errors = [];
@@ -28,9 +28,17 @@ await mkdir('docs/screenshots', { recursive: true });
 
 async function assertLayout(page, label) {
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  // Let Chromium paint the new scroll extent after an extreme viewport change.
-  // See the matching 7680→320 guard in verify-presentations.mjs.
-  await page.waitForTimeout(100);
+  // WebKit can acknowledge an extreme resize before updating CSS viewport units.
+  // Wait for the new scroll extent; persistent overflow still fails the assertion.
+  try {
+    await page.waitForFunction(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+      undefined,
+      { timeout: 1500, polling: 'raf' },
+    );
+  } catch (error) {
+    if (error.name !== 'TimeoutError') throw error;
+  }
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `Horizontal overflow: ${label}`);
   const clipped = await page.locator('h1, h2, .site-header__inner, .contact-action, .project-card, .case-study__actions').evaluateAll(nodes => nodes.filter(node => {
     const r = node.getBoundingClientRect();
@@ -192,9 +200,9 @@ try {
   await brokenImageContext.route('**/_next/image?**', route => route.abort());
   const brokenImagePage = await brokenImageContext.newPage();
   await brokenImagePage.goto(base);
-  await brokenImagePage.locator('.project-card').first().scrollIntoViewIfNeeded();
-  await brokenImagePage.getByRole('img', { name: 'RelayOps: скриншот не загрузился' }).waitFor();
-  assert.equal(await brokenImagePage.getByRole('link', { name: 'RelayOps: Код', exact: true }).count(), 1);
+  await brokenImagePage.locator('.project-card[data-project="relayops"]').scrollIntoViewIfNeeded();
+  await brokenImagePage.getByRole('img', { name: 'Маяк: скриншот не загрузился' }).waitFor();
+  assert.equal(await brokenImagePage.getByRole('link', { name: 'Маяк: Код', exact: true }).count(), 1);
   await brokenImageContext.close();
   console.log('PASS unavailable screenshot keeps description and actions accessible');
   for (const prefix of ['', '/en']) {
@@ -203,7 +211,7 @@ try {
     assert.match(await page.locator('h1').innerText(), prefix ? /Page not found/ : /Страница не найдена/);
     await page.waitForLoadState('networkidle');
   }
-  for (const path of ['/robots.txt', '/sitemap.xml', '/opengraph-image', '/icon.svg']) {
+  for (const path of ['/robots.txt', '/sitemap.xml', '/opengraph-image', '/icon.svg', '/favicon.ico']) {
     const response = await page.request.get(base + path);
     assert.equal(response.status(), 200, path);
   }

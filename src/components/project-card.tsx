@@ -10,7 +10,11 @@ type ProjectCardProps = {
   priority?: boolean;
 };
 
-function LinkIcon({ label }: { label: PortfolioProject["links"][number]["label"] }) {
+function LinkIcon({
+  label,
+}: {
+  label: PortfolioProject["links"][number]["label"];
+}) {
   if (label === "GitHub") {
     return <Github aria-hidden="true" />;
   }
@@ -18,9 +22,17 @@ function LinkIcon({ label }: { label: PortfolioProject["links"][number]["label"]
   return <ExternalLink aria-hidden="true" />;
 }
 
-export function ProjectCard({ project, locale, priority = false }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  locale,
+  priority = false,
+}: ProjectCardProps) {
   return (
-    <article className="project-card group">
+    <article
+      className="project-card group"
+      data-project={project.slug}
+      data-visual={project.visual}
+    >
       <div className="project-card__intro">
         <div className="project-card__meta">
           <span>{project.status}</span>
@@ -29,7 +41,9 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
 
         <div className="project-card__copy">
           <h3 translate="no">
-            <Link href={localizedPath(locale, `/work/${project.slug}`)}>{project.title}</Link>
+            <Link href={localizedPath(locale, `/work/${project.slug}`)}>
+              {project.title}
+            </Link>
           </h3>
           <p>{project.summary}</p>
         </div>
@@ -40,10 +54,32 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
         aria-label={`${translate(locale, "О проекте", "Read about")} ${project.title}`}
       >
         <ProjectMedia locale={locale} project={project} priority={priority} />
+        <span className="project-card__view">
+          {translate(locale, "Смотреть кейс", "View case study")}
+          <ArrowUpRight size={18} />
+        </span>
       </Link>
       <div className="project-card__body">
+        <ul
+          className="project-card__stack"
+          aria-label={translate(
+            locale,
+            "Технологии проекта",
+            "Project technologies",
+          )}
+          translate="no"
+        >
+          {project.stack.slice(0, 3).map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
         <div className="project-card__copy">
-          <p className="project-card__try"><strong>{translate(locale, "Что попробовать", "What to try")}: </strong>{project.tryIt}</p>
+          <p className="project-card__try">
+            <strong>
+              {translate(locale, "Что попробовать", "What to try")}:{" "}
+            </strong>
+            {project.tryIt}
+          </p>
           <p className="project-card__access">{project.access}</p>
         </div>
 
@@ -59,12 +95,24 @@ export function ProjectCard({ project, locale, priority = false }: ProjectCardPr
                   aria-label={`${project.title}: ${link.label === "Live" ? translate(locale, "Попробовать", "Try it") : translate(locale, "Код", "Code")}`}
                 >
                   <LinkIcon label={link.label} />
-                  <span>{link.label === "Live" ? translate(locale, "Попробовать", "Try it") : translate(locale, "Код", "Code")}</span>
+                  <span>
+                    {link.label === "Live"
+                      ? project.localPreview
+                        ? translate(locale, "Публичное демо", "Public demo")
+                        : translate(locale, "Попробовать", "Try it")
+                      : translate(locale, "Код", "Code")}
+                  </span>
                 </a>
               ))}
             </div>
           ) : null}
-          <Link className="project-card__details" href={localizedPath(locale, `/work/${project.slug}`)}>{translate(locale, "Подробнее", "Project details")}<ArrowUpRight aria-hidden="true" /></Link>
+          <Link
+            className="project-card__details"
+            href={localizedPath(locale, `/work/${project.slug}`)}
+          >
+            {translate(locale, "Подробнее", "Project details")}
+            <ArrowUpRight aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </article>

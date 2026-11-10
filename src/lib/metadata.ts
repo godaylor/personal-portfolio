@@ -4,28 +4,66 @@ import { localizedPath, type Locale } from "./i18n";
 
 export function canIndex() {
   const origin = process.env.NEXT_PUBLIC_SITE_URL;
-  if (!origin || (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production")) return false;
+  if (
+    !origin ||
+    (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production")
+  )
+    return false;
   const url = new URL(origin);
-  return url.protocol === "https:" && !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname);
+  return (
+    url.protocol === "https:" &&
+    !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)
+  );
 }
 
-export function pageMetadata(locale: Locale, path = "/", title?: string, description?: string): Metadata {
+export function pageMetadata(
+  locale: Locale,
+  path = "/",
+  title?: string,
+  description?: string,
+): Metadata {
   const data = getData(locale);
-  const pageTitle = title || data.name + " — " + data.role;
+  const brand = "Maxeem";
+  const pageTitle = title
+    ? `${title} — ${brand}`
+    : `${data.name} — ${data.role}, ${locale === "ru" ? "портфолио" : "portfolio"}`;
   const summary = description || data.description;
   return {
     metadataBase: new URL(data.url),
     title: { absolute: pageTitle },
     description: summary,
-    authors: [{ name: data.name }], creator: data.name,
+    authors: [{ name: data.name }],
+    creator: data.name,
     alternates: {
       canonical: localizedPath(locale, path),
-      languages: { ru: localizedPath("ru", path), en: localizedPath("en", path), "x-default": localizedPath("ru", path) },
+      languages: {
+        ru: localizedPath("ru", path),
+        en: localizedPath("en", path),
+        "x-default": localizedPath("ru", path),
+      },
     },
-    openGraph: { title: pageTitle, description: summary, url: localizedPath(locale, path),
-      siteName: data.name, locale: locale === "ru" ? "ru_RU" : "en_US", type: "website",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: data.name }] },
-    twitter: { card: "summary_large_image", title: pageTitle, description: summary, images: ["/opengraph-image"] },
+    openGraph: {
+      title: pageTitle,
+      description: summary,
+      url: localizedPath(locale, path),
+      siteName: brand,
+      locale: locale === "ru" ? "ru_RU" : "en_US",
+      type: "website",
+      images: [
+        {
+          url: "/opengraph-image?v=4",
+          width: 1200,
+          height: 630,
+          alt: data.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: summary,
+      images: ["/opengraph-image?v=4"],
+    },
     robots: { index: canIndex(), follow: canIndex() },
   };
 }

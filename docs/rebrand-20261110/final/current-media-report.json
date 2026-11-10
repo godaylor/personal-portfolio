@@ -1,0 +1,252 @@
+{
+  "base": "http://127.0.0.1:32807",
+  "checkedAt": "2026-11-10T00:44:05.231Z",
+  "browser": "Installed Chrome",
+  "assets": [
+    {
+      "src": "/projects/presentation/v7-mayak-overview.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 164696
+    },
+    {
+      "src": "/projects/presentation/v7-rakurs-home.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 209140
+    },
+    {
+      "src": "/projects/presentation/v7-po-shagam-workspace.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 139101
+    },
+    {
+      "src": "/projects/presentation/v6-napoli-product.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 190728
+    },
+    {
+      "src": "/projects/presentation/v6-solecraft-home.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 160407
+    },
+    {
+      "src": "/projects/presentation/v6-folio-overview.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 218999
+    },
+    {
+      "src": "/projects/presentation/v6-replaylab-home.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 148926
+    },
+    {
+      "src": "/projects/presentation/v6-variantlab-home.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 247139
+    },
+    {
+      "src": "/projects/presentation/v7-mayak-room.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 124633
+    },
+    {
+      "src": "/projects/presentation/v7-mayak-board.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 107855
+    },
+    {
+      "src": "/projects/presentation/v7-rakurs-explore.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 159616
+    },
+    {
+      "src": "/projects/presentation/v7-rakurs-dynamics.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 114491
+    },
+    {
+      "src": "/projects/presentation/v7-po-shagam-editor.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 108090
+    },
+    {
+      "src": "/projects/presentation/v7-po-shagam-run.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 101528
+    },
+    {
+      "src": "/projects/presentation/v6-napoli-menu.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 122811
+    },
+    {
+      "src": "/projects/presentation/v6-napoli-cart.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 110232
+    },
+    {
+      "src": "/projects/presentation/v6-solecraft-catalog.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 158008
+    },
+    {
+      "src": "/projects/presentation/v6-solecraft-product.jpg",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 140969
+    },
+    {
+      "src": "/projects/presentation/v6-folio-assets.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 156948
+    },
+    {
+      "src": "/projects/presentation/v6-folio-market.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 170696
+    },
+    {
+      "src": "/projects/presentation/v6-replaylab-watch.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 151556
+    },
+    {
+      "src": "/projects/presentation/v6-replaylab-editor.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 221627
+    },
+    {
+      "src": "/projects/presentation/v6-variantlab-editor.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 205727
+    },
+    {
+      "src": "/projects/presentation/v6-variantlab-compare.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 104617
+    }
+  ],
+  "checks": [
+    "ru/relayops/desktop",
+    "ru/signal-studio/desktop",
+    "ru/opsweave/desktop",
+    "ru/napoli/desktop",
+    "ru/solecraft/desktop",
+    "ru/folio/desktop",
+    "ru/replaylab/desktop",
+    "ru/variantlab/desktop",
+    "en/relayops/desktop",
+    "en/signal-studio/desktop",
+    "en/opsweave/desktop",
+    "en/napoli/desktop",
+    "en/solecraft/desktop",
+    "en/folio/desktop",
+    "en/replaylab/desktop",
+    "en/variantlab/desktop",
+    "ru/relayops/mobile",
+    "ru/signal-studio/mobile",
+    "ru/opsweave/mobile",
+    "ru/napoli/mobile",
+    "ru/solecraft/mobile",
+    "ru/folio/mobile",
+    "ru/replaylab/mobile",
+    "ru/variantlab/mobile",
+    "en/relayops/mobile",
+    "en/signal-studio/mobile",
+    "en/opsweave/mobile",
+    "en/napoli/mobile",
+    "en/solecraft/mobile",
+    "en/folio/mobile",
+    "en/replaylab/mobile",
+    "en/variantlab/mobile"
+  ],
+  "screenshots": [
+    "docs/rebrand-20261110/final/current-card-ru-relayops-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-signal-studio-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-opsweave-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-napoli-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-solecraft-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-folio-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-replaylab-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-variantlab-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-relayops-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-signal-studio-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-opsweave-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-napoli-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-solecraft-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-folio-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-replaylab-desktop.png",
+    "docs/rebrand-20261110/final/current-case-ru-variantlab-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-relayops-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-signal-studio-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-opsweave-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-napoli-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-solecraft-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-folio-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-replaylab-desktop.png",
+    "docs/rebrand-20261110/final/current-card-en-variantlab-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-relayops-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-signal-studio-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-opsweave-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-napoli-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-solecraft-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-folio-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-replaylab-desktop.png",
+    "docs/rebrand-20261110/final/current-case-en-variantlab-desktop.png",
+    "docs/rebrand-20261110/final/current-card-ru-relayops-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-signal-studio-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-opsweave-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-napoli-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-solecraft-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-folio-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-replaylab-mobile.png",
+    "docs/rebrand-20261110/final/current-card-ru-variantlab-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-relayops-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-signal-studio-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-opsweave-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-napoli-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-solecraft-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-folio-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-replaylab-mobile.png",
+    "docs/rebrand-20261110/final/current-case-ru-variantlab-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-relayops-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-signal-studio-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-opsweave-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-napoli-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-solecraft-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-folio-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-replaylab-mobile.png",
+    "docs/rebrand-20261110/final/current-card-en-variantlab-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-relayops-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-signal-studio-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-opsweave-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-napoli-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-solecraft-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-folio-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-replaylab-mobile.png",
+    "docs/rebrand-20261110/final/current-case-en-variantlab-mobile.png"
+  ],
+  "errors": []
+}

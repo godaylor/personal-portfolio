@@ -1,0 +1,37 @@
+{
+  "source": "public",
+  "brand": "По шагам",
+  "captures": [
+    {
+      "scene": "home",
+      "file": "public/projects/presentation/v7-po-shagam-home.jpg",
+      "url": "https://opsweave.onrender.com/",
+      "title": "По шагам — инструкции и инциденты"
+    },
+    {
+      "scene": "editor",
+      "file": "public/projects/presentation/v7-po-shagam-editor.jpg",
+      "url": "https://opsweave.onrender.com/?page=editor&id=1eced2d6-c318-4e60-be21-1833c0242af1",
+      "title": "По шагам — инструкции и инциденты"
+    },
+    {
+      "scene": "workspace",
+      "file": "public/projects/presentation/v7-po-shagam-workspace.jpg",
+      "url": "https://opsweave.onrender.com/?page=incidents",
+      "title": "По шагам — инструкции и инциденты"
+    },
+    {
+      "scene": "run",
+      "file": "public/projects/presentation/v7-po-shagam-run.jpg",
+      "url": "https://opsweave.onrender.com/?page=incidents&id=5f93a8f7-c7be-4bc0-926e-4923447a1fa7",
+      "title": "По шагам — инструкции и инциденты"
+    },
+    {
+      "scene": "mobile",
+      "file": "public/projects/presentation/v7-po-shagam-mobile.jpg",
+      "url": "https://opsweave.onrender.com/?page=incidents&id=5f93a8f7-c7be-4bc0-926e-4923447a1fa7",
+      "title": "По шагам — инструкции и инциденты"
+    }
+  ],
+  "errors": []
+}

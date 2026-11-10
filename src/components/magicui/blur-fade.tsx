@@ -1,16 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, useInView, useReducedMotion, type Variants } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface BlurFadeProps {
   children: React.ReactNode;
   className?: string;
-  variant?: {
-    hidden: { y: number };
-    visible: { y: number };
-  };
+  variant?: { hidden: { y: number }; visible: { y: number } };
   duration?: number;
   delay?: number;
   yOffset?: number;
@@ -18,49 +14,31 @@ interface BlurFadeProps {
   inViewMargin?: string;
 }
 
-const BlurFade = ({
-  children,
-  className,
-  variant,
-  duration = 0.45,
-  delay = 0,
-  yOffset = 8,
-  inView = false,
-  inViewMargin = "-50px",
-}: BlurFadeProps) => {
-  const ref = useRef(null);
-  const reduceMotion = useReducedMotion();
-  const inViewResult = useInView(ref, {
-    once: true,
-    ...(inViewMargin ? { margin: inViewMargin as never } : {}),
-  });
-  const isInView = !inView || inViewResult;
-
-  if (reduceMotion) {
-    return <div className={cn("blur-fade", className)}>{children}</div>;
-  }
-
-  const defaultVariants: Variants = {
-    hidden: { y: yOffset, opacity: 0 },
-    visible: { y: 0, opacity: 1 },
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={variant || defaultVariants}
-      transition={{
-        delay,
-        duration,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={cn("blur-fade", className)}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-export default BlurFade;
+// Keep server-rendered content visible. Motion is a progressive enhancement,
+// never a prerequisite to reading the page or a source of hydration differences.
+export default function BlurFade({ children, className, variant, duration = 0.6, delay = 0, yOffset = 16, inView = false, inViewMargin = "-30px" }: BlurFadeProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let animation: Animation | undefined;
+    let played = false;
+    const play = () => {
+      if (played || preference.matches || document.documentElement.dataset.motion === "paused") return;
+      played = true;
+      animation = element.animate([
+        { opacity: 0, transform: `translateY(${variant?.hidden.y ?? yOffset}px)` },
+        { opacity: 1, transform: `translateY(${variant?.visible.y ?? 0}px)` },
+      ], { duration: duration * 1000, delay: delay * 1000, easing: "cubic-bezier(.22,1,.36,1)", fill: "backwards" });
+    };
+    const observer = inView ? new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) { play(); observer?.disconnect(); }
+    }, { rootMargin: inViewMargin }) : null;
+    if (observer) observer.observe(element); else play();
+    const cancel = () => { if (preference.matches) animation?.cancel(); };
+    preference.addEventListener("change", cancel);
+    return () => { observer?.disconnect(); animation?.cancel(); preference.removeEventListener("change", cancel); };
+  }, [delay, duration, inView, inViewMargin, variant, yOffset]);
+  return <div ref={ref} className={cn("blur-fade", className)}>{children}</div>;
+}

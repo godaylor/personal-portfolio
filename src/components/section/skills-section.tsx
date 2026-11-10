@@ -1,6 +1,7 @@
-import { translate, type Locale } from "@/lib/i18n";
+import { localizedPath, translate, type Locale } from "@/lib/i18n";
 import { SectionHeading } from "@/components/section-heading";
 import { getData } from "@/data/resume";
+import Link from "next/link";
 
 export default function SkillsSection({ locale }: { locale: Locale }) {
   const DATA = getData(locale);
@@ -8,9 +9,13 @@ export default function SkillsSection({ locale }: { locale: Locale }) {
   return (
     <div className="skills-section">
       <SectionHeading
-        title={t("Стек моих проектов.", "The tools behind my projects.")}
+        eyebrow={t("В ПРОЕКТАХ", "IN THESE PROJECTS")}
+        title={t("Технологии", "Technologies")}
         titleId="stack-title"
-        description={t("Технологии, которые используются в представленных приложениях.", "Technologies used in the applications presented here.")}
+        description={t(
+          "Инструменты из представленных проектов. Полный стек — в каждом кейсе.",
+          "Tools used in the projects here. Each case study includes its full stack.",
+        )}
       />
 
       <div className="skill-groups">
@@ -22,7 +27,24 @@ export default function SkillsSection({ locale }: { locale: Locale }) {
                 <li key={skill}>{skill}</li>
               ))}
             </ul>
-            {group.note ? <p>{group.note}</p> : null}
+            <p
+              className="skill-group__projects"
+              aria-label={t("Примеры проектов", "Example projects")}
+            >
+              {group.projects.map((slug) => {
+                const project = DATA.projects.find(
+                  (project) => project.slug === slug,
+                )!;
+                return (
+                  <Link
+                    key={slug}
+                    href={localizedPath(locale, `/work/${slug}`)}
+                  >
+                    {project.title} ↗
+                  </Link>
+                );
+              })}
+            </p>
           </article>
         ))}
       </div>

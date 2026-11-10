@@ -1,0 +1,31 @@
+{
+  "source": "public",
+  "brand": "Маяк",
+  "captures": [
+    {
+      "scene": "overview",
+      "file": "public/projects/presentation/v7-mayak-overview.jpg",
+      "url": "https://relayops-godaylor.onrender.com/relayops/oEKx6tohYjFps1LpP2EbDFIoWT3TpO7k",
+      "title": "Маяк — сбои сервисов"
+    },
+    {
+      "scene": "room",
+      "file": "public/projects/presentation/v7-mayak-room.jpg",
+      "url": "https://relayops-godaylor.onrender.com/relayops/oEKx6tohYjFps1LpP2EbDFIoWT3TpO7k/incidents/zncnfubs3hxlxcl3t7c1a9ny",
+      "title": "Маяк — сбои сервисов"
+    },
+    {
+      "scene": "board",
+      "file": "public/projects/presentation/v7-mayak-board.jpg",
+      "url": "https://relayops-godaylor.onrender.com/relayops/oEKx6tohYjFps1LpP2EbDFIoWT3TpO7k/board",
+      "title": "Маяк — сбои сервисов"
+    },
+    {
+      "scene": "mobile",
+      "file": "public/projects/presentation/v7-mayak-mobile.jpg",
+      "url": "https://relayops-godaylor.onrender.com/relayops/oEKx6tohYjFps1LpP2EbDFIoWT3TpO7k",
+      "title": "Маяк — сбои сервисов"
+    }
+  ],
+  "errors": []
+}

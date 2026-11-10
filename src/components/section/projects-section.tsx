@@ -2,35 +2,79 @@ import { ProjectCard } from "@/components/project-card";
 import { SectionHeading } from "@/components/section-heading";
 import { getData } from "@/data/resume";
 import { translate, type Locale } from "@/lib/i18n";
-
+import { ProjectFilter } from "@/components/project-filter";
 export default function ProjectsSection({ locale }: { locale: Locale }) {
-  const DATA = getData(locale);
-  const t = (ru: string, en: string) => translate(locale, ru, en);
-  const projects = DATA.projects;
-
+  const data = getData(locale),
+    t = (ru: string, en: string) => translate(locale, ru, en);
+  const order = [
+    "signal-studio",
+    "napoli",
+    "relayops",
+    "solecraft",
+    "opsweave",
+    "folio",
+    "replaylab",
+  ];
+  const projects = order.map((slug) =>
+    data.projects.find((p) => p.slug === slug)!,
+  );
   return (
     <div className="projects-section">
       <SectionHeading
-        title={t("Выберите проект и попробуйте его.", "Choose a project to try.")}
+        eyebrow={t(
+          "ПРИЛОЖЕНИЯ / КЕЙСЫ / ИСХОДНЫЙ КОД",
+          "APPLICATIONS / CASE STUDIES / SOURCE CODE",
+        )}
+        title={t("Проекты", "Selected work")}
         titleId="selected-work-title"
-        description={t("У каждого приложения — пример действия, снимок экрана и код. Условия доступа указаны рядом со ссылкой.", "Each application has an action to try, a screenshot and source code. Access conditions are listed next to its link.")}
+        description={t(
+          "В каждом кейсе: задача, рабочие экраны, мой вклад и технические решения. Демо можно открыть отдельно.",
+          "Each case includes the problem, real screens, my contribution and technical decisions. Try each demo separately.",
+        )}
       />
-
-      <div className="featured-projects" aria-label={t("Все проекты", "All projects")}>
-        {projects.filter(project => project.slug !== "variantlab").map((project, index) => (
-          <ProjectCard
-            locale={locale}
-            project={project}
-            priority={index < 2}
-            key={project.slug}
-          />
-        ))}
-      </div>
+      <ProjectFilter
+        locale={locale}
+        items={projects.map((project) => ({
+          slug: project.slug,
+          category: ["napoli", "solecraft"].includes(project.slug)
+            ? "commerce"
+            : ["signal-studio", "folio"].includes(project.slug)
+              ? "data"
+              : "tools",
+          card: (
+            <ProjectCard locale={locale} project={project} key={project.slug} />
+          ),
+        }))}
+      />
       <section className="project-notes" aria-labelledby="in-development-title">
-        <h3 id="in-development-title">{t("В разработке", "In development")}</h3>
-        {projects.filter(project => project.slug === "variantlab").map(project => <ProjectCard key={project.slug} project={project} locale={locale} />)}
-        <p><strong>LifeOS Social</strong> — {t("отдельный проект личного планирования в разработке. Готовый кейс пока не представлен.", "a separate personal planning project in development. A completed case study is not available yet.")}</p>
-        <p><strong>Personal Portfolio</strong> — {t("сайт, который вы сейчас смотрите.", "the site you are viewing now.")} <a href="https://github.com/godaylor/personal-portfolio" target="_blank" rel="noreferrer">{t("Код сайта", "Website source")}</a></p>
+        <h3 id="in-development-title">
+          {t("Также в разработке", "Also in development")}
+        </h3>
+        {data.projects
+          .filter((p) => p.slug === "variantlab")
+          .map((project) => (
+            <ProjectCard key={project.slug} project={project} locale={locale} />
+          ))}
+        <div className="project-notes__aside">
+          <p>
+            <strong>LifeOS Social</strong> —{" "}
+            {t(
+              "проект личного планирования. Готовый кейс пока не представлен.",
+              "a personal planning project. A completed case is not available yet.",
+            )}
+          </p>
+          <p>
+            <strong>Maxeem — {t("портфолио", "portfolio")}</strong> —{" "}
+            {t("этот сайт.", "this website.")}{" "}
+            <a
+              href="https://github.com/godaylor/personal-portfolio"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t("Исходный код", "Source code")} ↗
+            </a>
+          </p>
+        </div>
       </section>
     </div>
   );
