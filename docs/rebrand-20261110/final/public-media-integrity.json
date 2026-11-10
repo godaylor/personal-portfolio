@@ -1,0 +1,71 @@
+{
+  "base": "https://personal-portfolio-maxeem.vercel.app",
+  "passed": true,
+  "results": [
+    {
+      "path": "/projects/presentation/v7-mayak-overview.jpg",
+      "bytes": 164696,
+      "sha256": "4bcbb09e2c678706abab1f72b25707b364881081d25fad0747aac412dd266862"
+    },
+    {
+      "path": "/projects/presentation/v7-mayak-mobile.jpg",
+      "bytes": 66396,
+      "sha256": "6131df5db1b5c63657f9256938b03c0a059476d2a3f010dd4832b12eff098026"
+    },
+    {
+      "path": "/projects/reels/v7-mayak.mp4",
+      "bytes": 236782,
+      "sha256": "a3100e5522375bb655e71a7aa21f4a91aa8eb42ee2ccaabfeb34dcb400d6a9e6"
+    },
+    {
+      "path": "/projects/presentation/v7-mayak-room.jpg",
+      "bytes": 124633,
+      "sha256": "7154fedd364f507483e1da82652bd955f2ea599d1ac3e93576b2d6ab2602c1ca"
+    },
+    {
+      "path": "/projects/presentation/v7-mayak-board.jpg",
+      "bytes": 107855,
+      "sha256": "0f11a8ab6b9da2cc3f34a054684c1c30dd7e91b1677ad627acc3270bd3c7a063"
+    },
+    {
+      "path": "/projects/presentation/v7-rakurs-home.jpg",
+      "bytes": 209140,
+      "sha256": "b13b138ec0dea926a26fe0f113c86a7647500604778ad5e0b5688add0330ab79"
+    },
+    {
+      "path": "/projects/presentation/v7-rakurs-mobile.jpg",
+      "bytes": 51911,
+      "sha256": "3954e095cc893d6e95cd1e5a4a8eeb7c296db0adfae64ff0372561419d59fcc2"
+    },
+    {
+      "path": "/projects/reels/v7-rakurs.mp4",
+      "bytes": 280199,
+      "sha256": "77d6c01feb1e44decf1bf46d148a0678f3c7d6083ca8b12742d1d8ad414cbb55"
+    },
+    {
+      "path": "/projects/presentation/v7-rakurs-explore.jpg",
+      "bytes": 159616,
+      "sha256": "7e8cc2880dfff05ad7e89f888f9c231bb24e3d6c1a5229e697f97901710e59bb"
+    },
+    {
+      "path": "/projects/presentation/v7-rakurs-dynamics.jpg",
+      "bytes": 114491,
+      "sha256": "24ed7b6ec0a6e53d028515ac68ae381ab9d9e9901000fae8e9c30e4c37530a21"
+    },
+    {
+      "path": "/projects/presentation/v7-po-shagam-workspace.jpg",
+      "bytes": 139101,
+      "sha256": "833574a447cc11d0f7caa74dc4eca9bcadebc5082eb39cca8d0051ba97aba579"
+    },
+    {
+      "path": "/projects/presentation/v7-po-shagam-editor.jpg",
+      "bytes": 108090,
+      "sha256": "177ffdabbb19cad912af7bff04eecc5b98dee73d068018d48eab6a831899baed"
+    },
+    {
+      "path": "/projects/presentation/v7-po-shagam-run.jpg",
+      "bytes": 101528,
+      "sha256": "354f5d8087b2d46100b93bfd6c8446a6b0f1d9fd3ea7532498c15bde3112d5cc"
+    }
+  ]
+}

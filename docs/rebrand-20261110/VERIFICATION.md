@@ -24,6 +24,8 @@
 - ESLint исходников портфолио и новых скриптов — PASS.
 - 32 проверки кейсов: RU/EN × desktop/mobile × 8 проектов; 24 уникальных изображения, 64 контрольных снимка, без ошибок JavaScript и горизонтального переполнения — PASS.
 - Anonymous Chrome на основном публичном адресе: 20 маршрутов, assets, воспроизведение и пауза видео, фильтры, галерея, RU/EN, обе темы, мобильная прокрутка, контакты и актуальные названия — PASS.
+- Все 13 используемых новых изображений и роликов на публичном адресе совпадают с проверенными файлами по SHA-256: [public-media-integrity.json](final/public-media-integrity.json).
+- Оба новых ролика Ракурса и Маяка декодируются и воспроизводятся на публичной главной в Chrome: readyState 4, без ошибок медиаплеера.
 - Контактная почта и все mailto: `maxeemit@mail.ru`.
 - Скриншоты публичной версии: [компьютер](final/public-desktop.png), [тёмная тема](final/public-dark.png), [телефон](final/public-mobile.png).
 
@@ -34,6 +36,7 @@
 - Ракурс: Vercel `dpl_5SD1jbtcwjWxndghRwFBSupA2Lf6` — Ready.
 - Портфолио: Vercel `dpl_3WrTHpadTCEbXvxN1jeToWUtvkMu` — Ready; основной адрес https://personal-portfolio-maxeem.vercel.app проверен без авторизации.
 - GitHub-профиль: `godaylor/godaylor`, commit `4915123` опубликован в `master`.
+- Исходники текущего опубликованного дизайна портфолио и переименование синхронизированы с `main`: `489fb75`.
 
 ## Отдельные ограничения CI
 
